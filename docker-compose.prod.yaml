@@ -1,0 +1,50 @@
+services:
+  quiz:
+    container_name: quiz_django_prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: prod
+    command: uv run python -m gunicorn --bind 0.0.0.0:8000 quiz.wsgi:application --timeout 900 --workers=4
+    env_file:
+      - prod.env
+    expose:
+      - "8000"
+    depends_on:
+      - postgres
+    networks:
+      - ngrok_network
+      - pg_network
+  postgres:
+    container_name: quiz_postgres_prod
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "0.0.0.0:5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - pg_network
+  ngrok:
+    container_name: quiz_ngrok_prod
+    image: ngrok/ngrok:3
+    command: http quiz:8000 --url fleet-useful-eft.ngrok-free.app
+    env_file:
+      - prod.env
+    depends_on:
+      - quiz
+    networks:
+      - ngrok_network
+
+volumes:
+  pg_data:
+
+
+networks:
+  ngrok_network:
+    driver: bridge
+  pg_network:
+    driver: bridge

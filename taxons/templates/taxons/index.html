@@ -1,0 +1,314 @@
+{% load django_htmx %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz Taxons</title>
+        <link rel="icon"
+              type="image/svg+xml"
+              href="{% static 'taxons/favicon.jpg' %}">
+        <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .quiz-section {
+            margin-bottom: 30px;
+        }
+
+        .images-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: #f0f0f0;
+            aspect-ratio: 1;
+            width: 100%;
+            max-width: 380px;
+            flex: 0 0 calc(50% - 10px);
+        }
+
+        @media (max-width: 768px) {
+            .image-container {
+                flex: 0 0 100%;
+            }
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #38a169;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .answer-section {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .answer-section h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .taxonomy-select {
+            cursor: pointer;
+        }
+
+        .propositions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .proposition-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .proposition-item:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .proposition-item input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .result {
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .result.correct {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 2px solid #48bb78;
+        }
+
+        .result.incorrect {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 2px solid #f56565;
+        }
+
+        .info-text {
+            color: #718096;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .toggle-mode {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        </style>
+        {% htmx_script %}
+    </head>
+    <body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
+        <div class="container">
+            <h1>🌿 Quiz Taxons 🌿</h1>
+            <div class="quiz-section">
+                <div id="images"
+                     hx-get="{% url 'images_grid' taxon.id %}"
+                     hx-trigger="load"></div>
+                <div class="answer-section">
+                    <div class="toggle-mode">
+                        <button class="btn btn-secondary"
+                                id="show-propositions"
+                                hx-post="{% url 'show_propositions' %}"
+                                hx-swap="none"
+                                onclick="showPropositions()">📋 4 propositions</button>
+                    </div>
+                    <div id="free-input-form">
+                        <h2>Quel est ce taxon ?</h2>
+                        <form method="post" id="taxonomy-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="submit_answer">
+                            <div id="taxonomy-container"
+                                 hx-get="{% url 'taxonomy_options' %}"
+                                 hx-trigger="load"
+                                 hx-swap="innerHTML"></div>
+                            <button type="submit"
+                                    id="submit-btn"
+                                    class="btn btn-secondary"
+                                    hx-post="{% url 'submit_answer' %}"
+                                    hx-target=".result-container"
+                                    hx-swap="outerHTML"
+                                    hx-vals='js:{"answer": document.querySelector("#nom_vernaculaire")?.value || ""}'
+                                    hx-on:click="this.disabled = true">Valider ma réponse</button>
+                        </form>
+                    </div>
+                    <div id="propositions-form" style="display: none;">
+                        <h2>Choisissez la bonne réponse :</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="submit_answer">
+                            <div class="propositions">
+                                {% for prop in propositions %}
+                                    <label class="proposition-item">
+                                        <input type="radio"
+                                               name="answer"
+                                               value="{{ prop }}"
+                                               required
+                                               onchange="document.getElementById('propositions-submit-btn').disabled = false">
+                                        <span>{{ prop }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                            <button type="submit"
+                                    id="propositions-submit-btn"
+                                    class="btn btn-secondary"
+                                    style="margin-top: 20px"
+                                    disabled
+                                    hx-post="{% url 'submit_answer' %}"
+                                    hx-target=".result-container"
+                                    hx-swap="outerHTML"
+                                    hx-on:click="this.disabled = true">Valider ma réponse</button>
+                        </form>
+                    </div>
+                    <div class="result-container"
+                         hx-post="{% url 'submit_answer' %}"
+                         hx-trigger="load"
+                         hx-swap="outerHTML"></div>
+                </div>
+                <p class="info-text">💡 Astuce : Vous pouvez demander jusqu'à 4 images pour vous aider !</p>
+            </div>
+        </div>
+        <script>
+        function showPropositions() {
+            document.getElementById('free-input-form').style.display = 'none';
+            document.getElementById('propositions-form').style.display = 'block';
+            document.getElementById('show-propositions').disabled = true;
+        }
+        </script>
+    </body>
+</html>

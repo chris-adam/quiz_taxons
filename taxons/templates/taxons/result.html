@@ -1,0 +1,15 @@
+{% if result %}
+    <div class="result-container">
+        <div class="result {{ result.class }}">{{ result.message }}</div>
+        <button class="btn btn-primary"
+                style="margin-top: 20px"
+                onclick="window.location.href='{% url 'index' %}'">Question suivante →</button>
+    </div>
+{% else %}
+    <div class="result-container">
+        <button class="btn btn-primary"
+                style="margin-top: 20px"
+                hx-post="{% url 'skip_question' %}"
+                hx-swap="none">⏭️ Passer</button>
+    </div>
+{% endif %}

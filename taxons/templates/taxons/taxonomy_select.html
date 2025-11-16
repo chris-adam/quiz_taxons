@@ -1,0 +1,154 @@
+{% if regne_options %}
+    <div class="input-group">
+        <label for="regne">Règne</label>
+        <select name="regne"
+                id="regne"
+                class="taxonomy-select"
+                hx-get="{% url 'taxonomy_options' %}"
+                hx-trigger="change"
+                hx-target="#taxonomy-container"
+                hx-swap="innerHTML"
+                hx-vals='js:{level: "regne", regne: event.target.value}'>
+            <option value="">-- Tous --</option>
+            {% for option in regne_options %}
+                <option value="{{ option }}" {% if option == regne %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endif %}
+{% if embranchement_options %}
+    <div class="input-group">
+        <label for="embranchement">Embranchement</label>
+        <select name="embranchement"
+                id="embranchement"
+                class="taxonomy-select"
+                hx-get="{% url 'taxonomy_options' %}"
+                hx-trigger="change"
+                hx-target="#taxonomy-container"
+                hx-swap="innerHTML"
+                hx-include="[name='regne']"
+                hx-vals='js:{level: "embranchement", embranchement: event.target.value}'>
+            <option value="">-- Tous --</option>
+            {% for option in embranchement_options %}
+                <option value="{{ option }}"
+                        {% if option == embranchement %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endif %}
+{% if classe_options %}
+    <div class="input-group">
+        <label for="classe">Classe</label>
+        <select name="classe"
+                id="classe"
+                class="taxonomy-select"
+                hx-get="{% url 'taxonomy_options' %}"
+                hx-trigger="change"
+                hx-target="#taxonomy-container"
+                hx-swap="innerHTML"
+                hx-include="[name='regne'],[name='embranchement']"
+                hx-vals='js:{level: "classe", classe: event.target.value}'>
+            <option value="">-- Tous --</option>
+            {% for option in classe_options %}
+                <option value="{{ option }}" {% if option == classe %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endif %}
+{% if ordre_options %}
+    <div class="input-group">
+        <label for="ordre">Ordre</label>
+        <select name="ordre"
+                id="ordre"
+                class="taxonomy-select"
+                hx-get="{% url 'taxonomy_options' %}"
+                hx-trigger="change"
+                hx-target="#taxonomy-container"
+                hx-swap="innerHTML"
+                hx-include="[name='regne'],[name='embranchement'],[name='classe']"
+                hx-vals='js:{level: "ordre", ordre: event.target.value}'>
+            <option value="">-- Tous --</option>
+            {% for option in ordre_options %}
+                <option value="{{ option }}" {% if option == ordre %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endif %}
+{% if famille_options %}
+    <div class="input-group">
+        <label for="famille">Famille</label>
+        <select name="famille"
+                id="famille"
+                class="taxonomy-select"
+                hx-get="{% url 'taxonomy_options' %}"
+                hx-trigger="change"
+                hx-target="#taxonomy-container"
+                hx-swap="innerHTML"
+                hx-include="[name='regne'],[name='embranchement'],[name='classe'],[name='ordre']"
+                hx-vals='js:{level: "famille", famille: event.target.value}'>
+            <option value="">-- Tous --</option>
+            {% for option in famille_options %}
+                <option value="{{ option }}" {% if option == famille %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endif %}
+{% if genre_options %}
+    <div class="input-group">
+        <label for="genre">Genre</label>
+        <select name="genre"
+                id="genre"
+                class="taxonomy-select"
+                hx-get="{% url 'taxonomy_options' %}"
+                hx-trigger="change"
+                hx-target="#taxonomy-container"
+                hx-swap="innerHTML"
+                hx-include="[name='regne'],[name='embranchement'],[name='classe'],[name='ordre'],[name='famille']"
+                hx-vals='js:{level: "genre", genre: event.target.value}'>
+            <option value="">-- Tous --</option>
+            {% for option in genre_options %}
+                <option value="{{ option }}" {% if option == genre %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endif %}
+{% if espece_options %}
+    <div class="input-group">
+        <label for="espece">Espèce</label>
+        <select name="espece"
+                id="espece"
+                class="taxonomy-select"
+                hx-get="{% url 'taxonomy_options' %}"
+                hx-trigger="change"
+                hx-target="#taxonomy-container"
+                hx-swap="innerHTML"
+                hx-include="[name='regne'],[name='embranchement'],[name='classe'],[name='ordre'],[name='famille'],[name='genre']"
+                hx-vals='js:{level: "espece", espece: event.target.value}'>
+            <option value="">-- Tous --</option>
+            {% for option in espece_options %}
+                <option value="{{ option }}" {% if option == espece %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endif %}
+{% if nom_vernaculaire_options %}
+    <div class="input-group">
+        <label for="nom_vernaculaire">Nom vernaculaire *</label>
+        <select name="nom_vernaculaire"
+                id="nom_vernaculaire"
+                class="taxonomy-select"
+                hx-get="{% url 'taxonomy_options' %}"
+                hx-trigger="change"
+                hx-target="#taxonomy-container"
+                hx-swap="innerHTML"
+                hx-vals='js:{level: "nom_vernaculaire", nom_vernaculaire: event.target.value}'
+                onchange="document.getElementById('submit-btn').disabled = !this.value"
+                required>
+            <option value="">-- Sélectionner --</option>
+            {% for option in nom_vernaculaire_options %}
+                <option value="{{ option }}"
+                        {% if option == nom_vernaculaire %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endif %}
