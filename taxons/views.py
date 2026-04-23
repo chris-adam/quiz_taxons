@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from taxons.models import SearchResult
@@ -194,6 +195,38 @@ def fetch_images_for_taxon(taxon):
         print(f"Error fetching iNaturalist observations for {taxon.nom_vernaculaire}: {e}", flush=True)
 
 
+def fetch_sounds_for_taxon(taxon):
+    """Fetch bird song recordings from Xeno-canto for Belgian observations."""
+    if taxon.espece and taxon.espece != "spp.":
+        query = f"gen:{taxon.genre} sp:{taxon.espece} cnt:Belgium type:song"
+    elif taxon.genre:
+        query = f"gen:{taxon.genre} cnt:Belgium type:song"
+    else:
+        return
+
+    try:
+        resp = requests.get(
+            "https://xeno-canto.org/api/3/recordings",
+            params={"query": query, "key": settings.XENOCANTO_API_KEY},
+            timeout=15,
+        ).json()
+        for recording in resp.get("recordings", [])[:30]:
+            file_url = recording.get("file", "")
+            if not file_url:
+                continue
+            loc = recording.get("loc", "")
+            rec = recording.get("rec", "")
+            length = recording.get("length", "")
+            attribution = f"{rec} — {loc} ({length})"
+            taxon.search_results.create(
+                title=attribution[:300],
+                link=file_url,
+                image_context_link=recording.get("url", ""),
+            )
+    except Exception as e:
+        print(f"Error fetching Xeno-canto sounds for {taxon.nom_vernaculaire}: {e}", flush=True)
+
+
 def render_images_grid(request, taxon_id):
     """Render image grid for a given taxon (for HTMX requests)"""
 
@@ -202,11 +235,13 @@ def render_images_grid(request, taxon_id):
     # Fetch or create search results
     search_results = taxon.search_results.all()
     if not search_results:
+        if taxon.classe == "Aves":
+            fetch_sounds_for_taxon(taxon)
         fetch_images_for_taxon(taxon)
         search_results = taxon.search_results.all()
 
     if not search_results:
-        return HttpResponse(f"Aucune image trouvée pour ce taxon (id={taxon.id}).", status=404)
+        return HttpResponse(f"Aucun résultat trouvé pour ce taxon (id={taxon.id}).", status=404)
 
     if request.method == "POST":
         # Deduct 2 points for requesting more images

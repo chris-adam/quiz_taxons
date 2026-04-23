@@ -1,9 +1,8 @@
-import csv
-
-import pdfplumber
 from django.core.management.base import BaseCommand
-
 from taxons.models import Taxon
+
+import csv
+import pdfplumber
 
 
 class Command(BaseCommand):

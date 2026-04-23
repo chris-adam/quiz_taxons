@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Quiz Taxons is a Django web application that helps users learn biological taxonomy (species identification) for the CNBs (Cercles Naturalistes de Belgique) Naturalist Training program. Users are shown Google Images of a species and must identify it by name or from multiple-choice options.
+Quiz Taxons is a Django web application that helps users learn biological taxonomy (species identification) for the CNBs (Cercles Naturalistes de Belgique) Naturalist Training program. Users are shown photos (or hear bird songs) of a species and must identify it by name or from multiple-choice options.
 
 ## Development Commands
 
@@ -34,12 +34,12 @@ App is at `http://localhost:8000`, admin at `http://localhost:8000/admin`.
 
 ### Models (`taxons/models.py`)
 - **Taxon** — species data (taxonomy hierarchy + vernacular name + identifying features)
-- **SearchResult** — cached Google Custom Search image results per taxon
+- **SearchResult** — cached media results per taxon: iNaturalist photos (non-birds) or Xeno-canto MP3 recordings (Aves)
 - **UserScore** — per-session score per taxon; compound index on `(session_id, score)` drives taxon selection
 
 ### Quiz flow
 1. `index()` selects the taxon with the lowest score for the current session (unseen taxons score 0 by default)
-2. `render_images_grid()` (HTMX) calls Google Custom Search API and renders images; subsequent calls add more images and deduct points
+2. `render_images_grid()` (HTMX) fetches and renders media: iNaturalist photos for non-birds, Xeno-canto songs (MP3) for Aves; subsequent calls add more and deduct points
 3. `show_propositions()` (HTMX) generates 4 multiple-choice options by finding taxons at the same taxonomic level (genus → family → order → class → phylum → random); deducts points
 4. `render_result()` (HTMX) checks the answer, updates `UserScore`, and returns feedback
 
@@ -71,8 +71,7 @@ Required in `.env` (dev) or `prod.env` (prod):
 SECRET_KEY
 DEBUG                    # 1 for dev, 0 for prod
 ALLOWED_HOSTS
-GOOGLE_SEARCH_ENGINE     # Google Custom Search engine ID
-GOOGLE_SEARCH_API_KEY
+XENOCANTO_API_KEY        # Free key from xeno-canto.org (required for bird songs)
 POSTGRES_DB / POSTGRES_USER / POSTGRES_PASSWORD / POSTGRES_HOST
 ```
 
