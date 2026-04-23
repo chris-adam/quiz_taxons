@@ -24,11 +24,7 @@ class SearchResult(models.Model):
     taxon = models.ForeignKey(Taxon, on_delete=models.CASCADE, related_name="search_results")
     title = models.CharField(max_length=300)
     link = models.URLField(max_length=500)
-    file_format = models.CharField(max_length=100)
     image_context_link = models.URLField(max_length=500)
-    image_height = models.IntegerField()
-    image_width = models.IntegerField()
-    image_byte_size = models.IntegerField()
 
     def __str__(self):
         return f"{self.taxon.nom_vernaculaire} - {self.title}"

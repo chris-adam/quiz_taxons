@@ -54,20 +54,11 @@ class TaxonAdmin(admin.ModelAdmin):
 
 @admin.register(SearchResult)
 class SearchResultAdmin(admin.ModelAdmin):
-    list_display = ("taxon", "title", "image_width", "image_height", "image_byte_size", "file_format")
-    list_filter = ("file_format", "taxon")
+    list_display = ("taxon", "title")
+    list_filter = ("taxon",)
     search_fields = ("title", "taxon__nom_vernaculaire")
-    readonly_fields = (
-        "taxon",
-        "title",
-        "link",
-        "file_format",
-        "image_context_link",
-        "image_height",
-        "image_width",
-        "image_byte_size",
-    )
-    ordering = ("taxon", "-image_byte_size")
+    readonly_fields = ("taxon", "title", "link", "image_context_link")
+    ordering = ("taxon",)
 
     def has_add_permission(self, request):
         return False

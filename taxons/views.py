@@ -1,16 +1,12 @@
-import random
-import secrets
-import urllib.parse
-
-import requests
 from django.http import HttpResponse
 from django.shortcuts import render
-
-from quiz.settings import GOOGLE_SEARCH_API_KEY
-from quiz.settings import GOOGLE_SEARCH_ENGINE
 from taxons.models import SearchResult
 from taxons.models import Taxon
 from taxons.models import UserScore
+
+import random
+import requests
+import secrets
 
 
 def get_or_create_session_id(request):
@@ -135,11 +131,9 @@ def index(request):
 
 
 def fetch_images_for_taxon(taxon):
-    """Fetch images from Google Custom Search API"""
+    """Fetch verified observations with photos from iNaturalist near Belgium."""
 
-    # Determine the lowest available taxonomy level
-    if taxon.espece:
-        # Use binomial name (genus + species)
+    if taxon.espece and taxon.espece != "spp.":
         scientific_name = f"{taxon.genre} {taxon.espece}"
     elif taxon.genre:
         scientific_name = taxon.genre
@@ -154,32 +148,50 @@ def fetch_images_for_taxon(taxon):
     elif taxon.regne:
         scientific_name = taxon.regne
     else:
-        scientific_name = ""
+        return
 
-    for partie_etat_indice in taxon.partie_etat_indice.split(" + "):
-        query = {
-            "key": GOOGLE_SEARCH_API_KEY,
-            "cx": GOOGLE_SEARCH_ENGINE,
-            "num": 10,
-            "searchType": "image",
-            "q": f"{taxon.nom_vernaculaire} {scientific_name} {partie_etat_indice}",
-        }
-        url = "https://www.googleapis.com/customsearch/v1?" + urllib.parse.urlencode(query)
+    try:
+        taxa_resp = requests.get(
+            "https://api.inaturalist.org/v1/taxa/autocomplete",
+            params={"q": scientific_name, "per_page": 1},
+            timeout=10,
+        ).json()
+        taxa_results = taxa_resp.get("results", [])
+        if not taxa_results:
+            return
+        taxon_id = taxa_results[0]["id"]
+    except Exception as e:
+        print(f"Error looking up iNaturalist taxon for {scientific_name}: {e}", flush=True)
+        return
 
-        try:
-            json_results = requests.get(url).json()
-            for item in json_results.get("items", []):
-                taxon.search_results.create(
-                    title=item.get("title", "")[:300],
-                    link=item.get("link", ""),
-                    file_format=item.get("fileFormat", ""),
-                    image_context_link=item.get("image", {}).get("contextLink", ""),
-                    image_height=item.get("image", {}).get("height", 0),
-                    image_width=item.get("image", {}).get("width", 0),
-                    image_byte_size=item.get("image", {}).get("byteSize", 0),
-                )
-        except Exception as e:
-            print(f"Error fetching images for {taxon.nom_vernaculaire}: {e}")
+    try:
+        obs_resp = requests.get(
+            "https://api.inaturalist.org/v1/observations",
+            params={
+                "taxon_id": taxon_id,
+                "place_id": 7008,
+                "quality_grade": "research",
+                "photos": "true",
+                "per_page": 30,
+            },
+            timeout=15,
+        ).json()
+        for obs in obs_resp.get("results", []):
+            photos = obs.get("photos", [])
+            if not photos:
+                continue
+            photo = photos[0]
+            square_url = photo.get("url", "")
+            if not square_url:
+                continue
+            medium_url = square_url.replace("/square.", "/medium.")
+            taxon.search_results.create(
+                title=photo.get("attribution", "")[:300],
+                link=medium_url,
+                image_context_link=obs.get("uri", ""),
+            )
+    except Exception as e:
+        print(f"Error fetching iNaturalist observations for {taxon.nom_vernaculaire}: {e}", flush=True)
 
 
 def render_images_grid(request, taxon_id):
@@ -194,7 +206,7 @@ def render_images_grid(request, taxon_id):
         search_results = taxon.search_results.all()
 
     if not search_results:
-        return render(request, "taxons/index.html", {"error": "No images found for this taxon."})
+        return HttpResponse(f"Aucune image trouvée pour ce taxon (id={taxon.id}).", status=404)
 
     if request.method == "POST":
         # Deduct 2 points for requesting more images
