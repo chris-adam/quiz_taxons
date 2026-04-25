@@ -26,8 +26,10 @@ CATEGORIES = [
 ]
 
 
-def get_score_lists(session_id, category=""):
+def get_score_lists(session_id, dataset="", category=""):
     qs = UserScore.objects.filter(session_id=session_id)
+    if dataset:
+        qs = qs.filter(taxon__dataset=dataset)
     if category:
         qs = qs.filter(taxon__category=category)
     all_scores = qs.select_related("taxon").order_by("-score", "-updated_at")
@@ -47,8 +49,10 @@ def get_or_create_session_id(request):
     return request.session["user_session_id"]
 
 
-def get_next_taxon(session_id, category=""):
+def get_next_taxon(session_id, dataset="", category=""):
     qs = Taxon.objects.all()
+    if dataset:
+        qs = qs.filter(dataset=dataset)
     if category:
         qs = qs.filter(category=category)
 
