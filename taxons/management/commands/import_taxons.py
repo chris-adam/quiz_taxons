@@ -528,15 +528,18 @@ CATEGORY_MAP = {
 }
 
 
+DATASETS = ["nature", "rando"]
+
+
 class Command(BaseCommand):
     help = "Import taxons from CSV file"
     inaturalist_last_call = None
     xenocanto_last_call = None
 
     def add_arguments(self, parser):
-        parser.add_argument("--file", type=str, default="taxons.pdf", help="Path to the PDF file (default: taxons.pdf)")
+        pass
 
-    def extract_pdf_to_csv(self, path):
+    def extract_pdf_to_csv(self, pdf_path, csv_path):
         hdrs = [
             (
                 "Règne",
@@ -550,7 +553,7 @@ class Command(BaseCommand):
                 "Partie/état/indice à reconnaitre",
             )
         ]
-        with pdfplumber.open(path) as pdf:
+        with pdfplumber.open(pdf_path) as pdf:
             for page in pdf.pages:
                 for tb in page.extract_tables():
                     for sub_tb in tb:
@@ -570,7 +573,7 @@ class Command(BaseCommand):
                                 )
                             )
 
-        with open("taxons.csv", "w", encoding="utf-8", newline="") as f:
+        with open(csv_path, "w", encoding="utf-8", newline="") as f:
             writer = csv.writer(f)
             writer.writerows(hdrs)
 
@@ -654,14 +657,9 @@ class Command(BaseCommand):
             self.stdout.write(f"Not found in Xeno-canto: {species_query} (tried Belgium/France, song/any) ({row.get('Nom vernaculaire')})")
             # raise CommandError(f"Not found in Xeno-canto: {species_query} ({row.get('Nom vernaculaire')})")
 
-    def handle(self, *args, **options):
-        file_path = options["file"]
-        if not os.path.exists("taxons.csv"):
-            self.extract_pdf_to_csv(file_path)
-
-        with open("taxons.csv", "r", encoding="utf-8") as csvfile:
+    def import_csv(self, csv_path, dataset_name):
+        with open(csv_path, "r", encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
-
             created_count = 0
             updated_count = 0
 
@@ -670,22 +668,27 @@ class Command(BaseCommand):
                 if row.get("Classe") == "Aves":
                     self.validate_xenocanto(row)
 
-                embranchement = row["Embranchement (Sous-embranchement)"]
+                embranchement = row["Embranchement (Sous-embranchement)"] or ""
                 if "(" in embranchement:
                     embranchement = embranchement.split("(")[0].strip()
 
-                ordre = row["Ordre (Sous-ordre)"]
+                ordre = row["Ordre (Sous-ordre)"] or ""
                 if "(" in ordre:
                     ordre = ordre.split("(")[0].strip()
 
                 nom_vernaculaire = row["Nom vernaculaire"]
                 if nom_vernaculaire not in CATEGORY_MAP:
-                    raise CommandError(f"No category mapping for: '{nom_vernaculaire}'")
+                    self.stdout.write(
+                        self.style.WARNING(
+                            f"No category mapping for: '{nom_vernaculaire}' — importing with empty category"
+                        )
+                    )
+                category = CATEGORY_MAP.get(nom_vernaculaire, "")
 
-                # Create or update taxon
                 taxon, created = Taxon.objects.update_or_create(
                     genre=row["Genre"],
                     espece=row["Espèce"],
+                    dataset=dataset_name,
                     defaults={
                         "regne": row["Règne"],
                         "embranchement": embranchement,
@@ -694,18 +697,53 @@ class Command(BaseCommand):
                         "famille": row["Famille"],
                         "nom_vernaculaire": nom_vernaculaire,
                         "partie_etat_indice": row["Partie/état/indice à reconnaitre"],
-                        "category": CATEGORY_MAP[nom_vernaculaire],
+                        "category": category,
                     },
                 )
 
                 if created:
                     created_count += 1
-                    # self.stdout.write(f"Created: {taxon.nom_vernaculaire}")
                 else:
                     updated_count += 1
-                    # self.stdout.write(f"Updated: {taxon.nom_vernaculaire}")
 
-        self.stdout.write(self.style.SUCCESS(f"\nImport complete! Created: {created_count}, Updated: {updated_count}"))
+        return created_count, updated_count
+
+    def handle(self, *args, **options):
+        total_created = 0
+        total_updated = 0
+
+        for dataset_name in DATASETS:
+            csv_path = f"{dataset_name}.csv"
+            pdf_path = f"{dataset_name}.pdf"
+
+            if os.path.exists(csv_path):
+                pass
+            elif os.path.exists(pdf_path):
+                self.stdout.write(f"Extracting {pdf_path} → {csv_path}...")
+                self.extract_pdf_to_csv(pdf_path, csv_path)
+            else:
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"Neither {csv_path} nor {pdf_path} found — skipping dataset '{dataset_name}'"
+                    )
+                )
+                continue
+
+            self.stdout.write(f"Importing dataset '{dataset_name}' from {csv_path}...")
+            created_count, updated_count = self.import_csv(csv_path, dataset_name)
+            total_created += created_count
+            total_updated += updated_count
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"Dataset '{dataset_name}': Created={created_count}, Updated={updated_count}"
+                )
+            )
+
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"\nImport complete! Total created: {total_created}, updated: {total_updated}"
+            )
+        )
 
 # Corrections nature :
 # Valeriana rupens -> Valeriana officinalis
