@@ -376,6 +376,20 @@
         <div class="page-wrapper">
         <div class="container">
             <h1>🌿 Quiz Taxons 🌿</h1>
+            {% if datasets %}
+            <div class="quiz-section">
+                <h2 style="text-align:center; color:#2d3748; margin-bottom:24px;">Choisissez un dataset</h2>
+                <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+                    {% for ds in datasets %}
+                        <a href="/?dataset={{ ds|urlencode }}"
+                           class="btn btn-primary"
+                           style="text-decoration:none; font-size:1.2em; padding:16px 32px;">
+                            {{ ds|capfirst }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
             <div class="quiz-section">
                 <div id="images"
                      hx-get="{% url 'images_grid' taxon.id %}"
@@ -445,6 +459,7 @@
                 </div>
                 <p class="info-text">💡 Astuce : Vous pouvez demander jusqu'à 4 images pour vous aider !</p>
             </div>
+            {% endif %}
             <footer>
                 <div class="footer-row">
                     Créé par Chris ADAM
@@ -462,15 +477,18 @@
             </footer>
         </div>
         <div class="sidebar">
+            {% if not datasets %}
             <div class="portlet category-filter">
                 <h2>🔍 Catégorie</h2>
-                <a href="/" class="{% if not category %}active{% endif %}">Tous</a>
+                <a href="/?dataset={{ dataset|urlencode }}"
+                   class="{% if not category %}active{% endif %}">Tous</a>
                 {% for cat in categories %}
-                    <a href="/?category={{ cat|urlencode }}"
+                    <a href="/?dataset={{ dataset|urlencode }}&category={{ cat|urlencode }}"
                        class="{% if category == cat %}active{% endif %}">{{ cat }}</a>
                 {% endfor %}
             </div>
             {% include 'taxons/scores_portlet.html' %}
+            {% endif %}
         </div>
         </div>
         <script>
