@@ -5,10 +5,10 @@ from django.template.loader import render_to_string
 from taxons.models import SearchResult
 from taxons.models import Taxon
 from taxons.models import UserScore
+from taxons.utils import requests_session
 
 import random
 import secrets
-from taxons.utils import requests_session
 
 
 CATEGORIES = [
@@ -363,7 +363,7 @@ def render_result(request):
                 user_score.save()
             result = {
                 "class": "correct",
-                "message": f"✅ Correct ! C'est bien {taxon.nom_vernaculaire} ({taxon.genre} {taxon.espece})",
+                "message": f"✅ Correct ! C'est bien {taxon.nom_vernaculaire}" + (f" ({taxon.genre} {taxon.espece})" if taxon.espece else ""),
             }
         else:
             guessed_taxon = Taxon.objects.filter(nom_vernaculaire=request.POST.get("answer", "").strip()).first()
@@ -377,7 +377,7 @@ def render_result(request):
             UserScore.objects.get_or_create(session_id=session_id, taxon=taxon, defaults={"score": 0})
             result = {
                 "class": "incorrect",
-                "message": f"❌ Incorrect. La réponse était : {taxon.nom_vernaculaire} ({taxon.genre} {taxon.espece})",
+                "message": f"❌ Incorrect. La réponse était : {taxon.nom_vernaculaire}" + (f" ({taxon.genre} {taxon.espece})" if taxon.espece else ""),
             }
     else:
         result = {
