@@ -129,6 +129,44 @@
             white-space: nowrap;
         }
 
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            cursor: help;
+            position: relative;
+            vertical-align: middle;
+            margin-left: 4px;
+            color: #a0aec0;
+            font-size: 0.85em;
+        }
+
+        .info-icon::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d3748;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 400;
+            width: 230px;
+            white-space: pre-line;
+            line-height: 1.5;
+            text-align: left;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 100;
+        }
+
+        .info-icon:hover::after,
+        .info-icon:focus::after {
+            opacity: 1;
+        }
+
         .portlet-empty {
             color: #a0aec0;
             font-size: 13px;
@@ -369,7 +407,7 @@
         </style>
         {% htmx_script %}
         <script src="//unpkg.com/alpinejs" defer></script>
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
     </head>
     <body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>

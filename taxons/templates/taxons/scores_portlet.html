@@ -1,5 +1,5 @@
 <aside id="scores-portlet" class="portlet"{% if oob %} hx-swap-oob="true"{% endif %}>
-    <h2>🏆 Mes scores</h2>
+    <h2>🏆 Mes scores <span class="info-icon" tabindex="0" aria-label="Comment le score est calculé" data-tooltip="Chaque question commence à 10 pts.&#10;Demander 4 propositions : -5 pts.&#10;Image supplémentaire : -2 pts par lot.&#10;Mauvaise réponse : 0 pt sur le taxon demandé, -5 pts sur le taxon confondu."><i class="fa-solid fa-circle-info"></i></span></h2>
     {% if top_scores or bottom_scores %}
     <table class="scores-table">
         <thead>
