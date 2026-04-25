@@ -1,4 +1,4 @@
-from django.test import TestCase, Client
+from django.test import TestCase, Client, override_settings
 from taxons.models import Taxon, UserScore
 from taxons.views import get_next_taxon, get_score_lists
 
@@ -106,6 +106,10 @@ class GetNextTaxonTest(TestCase):
         self.assertIsNone(result)
 
 
+@override_settings(STORAGES={
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
+})
 class IndexViewDatasetTest(TestCase):
     def setUp(self):
         self.client = Client()

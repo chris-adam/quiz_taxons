@@ -76,12 +76,27 @@ def get_next_taxon(session_id, dataset="", category=""):
 def index(request):
     session_id = get_or_create_session_id(request)
 
+    dataset = request.GET.get("dataset", "")
     category = request.GET.get("category", "")
 
-    # Reset current question when category changes
+    # No dataset selected: show the dataset selector widget
+    if not dataset:
+        datasets = list(
+            Taxon.objects.values_list("dataset", flat=True).distinct().order_by("dataset")
+        )
+        return render(request, "taxons/index.html", {"datasets": datasets})
+
+    # Reset session when dataset changes
+    if dataset != request.session.get("current_dataset", ""):
+        for key in ("current_taxon_id", "search_results_ids", "current_score", "current_song_id"):
+            request.session.pop(key, None)
+
+    # Reset session when category changes
     if category != request.session.get("current_category", ""):
         for key in ("current_taxon_id", "search_results_ids", "current_score", "current_song_id"):
             request.session.pop(key, None)
+
+    request.session["current_dataset"] = dataset
     request.session["current_category"] = category
 
     # Clean up session for fresh question
@@ -90,14 +105,17 @@ def index(request):
     request.session.pop("current_score", None)
     request.session.pop("current_song_id", None)
 
-    taxon = get_next_taxon(session_id, category)
+    taxon = get_next_taxon(session_id, dataset=dataset, category=category)
     if not taxon:
-        return render(request, "taxons/index.html", {"error": "No taxons available."})
+        return render(request, "taxons/index.html", {
+            "error": "No taxons available.",
+            "dataset": dataset,
+        })
     request.session["current_taxon_id"] = taxon.id
     request.session["current_score"] = 10
 
-    # Generate propositions from same category (taxonomy-level fallback within category)
-    base_qs = Taxon.objects.all()
+    # Generate propositions filtered to this dataset (and category)
+    base_qs = Taxon.objects.filter(dataset=dataset)
     if category:
         base_qs = base_qs.filter(category=category)
 
@@ -139,13 +157,13 @@ def index(request):
     propositions = [taxon.nom_vernaculaire] + [t.nom_vernaculaire for t in selected_wrong]
     random.shuffle(propositions)
 
-    # Answer dropdown: all nom_vernaculaire in category, alphabetical
-    nv_qs = Taxon.objects.all()
+    # Answer dropdown: all nom_vernaculaire in this dataset/category, alphabetical
+    nv_qs = Taxon.objects.filter(dataset=dataset)
     if category:
         nv_qs = nv_qs.filter(category=category)
     nom_vernaculaire_list = list(nv_qs.order_by("nom_vernaculaire").values_list("nom_vernaculaire", flat=True))
 
-    top_scores, bottom_scores = get_score_lists(session_id, category)
+    top_scores, bottom_scores = get_score_lists(session_id, dataset=dataset, category=category)
 
     return render(
         request,
@@ -155,6 +173,7 @@ def index(request):
             "propositions": propositions,
             "top_scores": top_scores,
             "bottom_scores": bottom_scores,
+            "dataset": dataset,
             "category": category,
             "categories": CATEGORIES,
             "nom_vernaculaire_list": nom_vernaculaire_list,
@@ -313,6 +332,7 @@ def render_images_grid(request, taxon_id):
 def render_result(request):
     session_id = get_or_create_session_id(request)
     category = request.session.get("current_category", "")
+    dataset = request.session.get("current_dataset", "")
 
     taxon_id = request.session.get("current_taxon_id")
     if taxon_id:
@@ -354,8 +374,8 @@ def render_result(request):
             "message": "❌ No active question",
         }
 
-    top_scores, bottom_scores = get_score_lists(session_id, category)
-    result_html = render_to_string("taxons/result.html", {"result": result, "category": category}, request=request)
+    top_scores, bottom_scores = get_score_lists(session_id, dataset=dataset, category=category)
+    result_html = render_to_string("taxons/result.html", {"result": result, "category": category, "dataset": dataset}, request=request)
     portlet_html = render_to_string(
         "taxons/scores_portlet.html",
         {"top_scores": top_scores, "bottom_scores": bottom_scores, "oob": True},
