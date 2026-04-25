@@ -1,0 +1,493 @@
+Règne,Embranchement (Sous-embranchement),Classe,Ordre (Sous-ordre),Famille,Genre,Espèce,Nom vernaculaire,Partie/état/indice à reconnaitre
+Plantae,Hepatica,Marchantiopsida,,,,,Hépatiques à feuilles,Partie végétative
+Plantae,Hepatica,Marchantiopsida,,,,,Hépatiques à thalle,Partie végétative
+Plantae,Bryophyta,Bryopsida,,,,,Mousses acrocarpes,Partie végétative
+Plantae,Bryophyta,Bryopsida,,,,,Mousses pleurocarpes,Partie végétative
+Plantae,Bryophyta,Sphagnopsida,,,,,Sphaignes,Partie végétative
+Plantae,Pteridophyta,Polypodiodsida,Equisetales,Equisetaceae,Equisetum,arvense,Prêle des champs,Partie végétative
+Plantae,Pteridophyta,Polypodiodsida,Polypodiales,Aspleniaceae,Asplenium,ruta-muraria,Rue des murailles,Partie végétative
+Plantae,Pteridophyta,Polypodiodsida,Polypodiales,Aspleniaceae,Asplenium,scolopendrium,Langue de cerf,Partie végétative
+Plantae,Pteridophyta,Polypodiodsida,Polypodiales,Dennstaedtiaceae,Pteridium,aquilinum,Fougère aigle,Partie végétative
+Plantae,Spermatophyta (Gymnospermae),Pinopsida,Pinales,Cupressaceae,Juniperus,communis,Genévrier commun,Rameau avec feuilles
+Plantae,Spermatophyta (Gymnospermae),Pinopsida,Pinales,Pinaceae,Larix,spp.,Mélèzes,Rameau avec feuilles
+Plantae,Spermatophyta (Gymnospermae),Pinopsida,Pinales,Pinaceae,Picea,abies,Épicéa commun,Rameau avec feuilles + écorce
+Plantae,Spermatophyta (Gymnospermae),Pinopsida,Pinales,Pinaceae,Pinus,sylvestris,Pin sylvestre,Rameau avec feuilles + écorce
+Plantae,Spermatophyta (Gymnospermae),Pinopsida,Pinales,Pinaceae,Pseudotsuga,menziesii,Douglas,Rameau avec feuilles
+Plantae,Spermatophyta (Gymnospermae),Pinopsida,Taxales,Taxaceae,Taxus,baccata,If,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Nymphaeales,Nymphaeaceae,Nuphar,lutea,Nénufar jaune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Nymphaeales,Nymphaeaceae,Nymphaea,alba,Nénufar blanc,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Alismatales,Araceae,Arum,maculatum,Gouet tacheté,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Alismatales,Araceae,Lemna,spp.,Lentilles,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Alismatales,Alismata ceae,Alisma,spp.,Plantains d’eau,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Alismatales,Butomaceae,Butomus,umbellatus,Butome en ombelle,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Liliales,Melanthiaceae,Paris,quadrifolia,Parisette,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Liliales,Colchicaceae,Colchicum,autumnale,Colchique d'automne,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Asparagales,Iridaceae,Iris,pseudacorus,Iris jaune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Asparagales,Amaryllidaceae,Allium,ursinum,Ail des ours,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Asparagales,Amaryllidaceae,Galanthus,nivalis,Perce-neige,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Asparagales,Amaryllidaceae,Narcissus,pseudonarcissus,Jonquille,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Asparagales,Asparagaceae,Convallaria,majalis,Muguet,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Asparagales,Asparagaceae,Hyacinthoides,non-scripta,Jacinthe des bois,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Asparagales,Asparagaceae,Polygonatum,multiflorum,Sceau-de-Salomon multiflore,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Poales,Typhaceae,Typha,spp.,Massettes,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Poales,Juncaceae,Juncus,effusus,Jonc épars,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Poales,Poaceae,Phragmites,australis,Roseau,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Papaveraceae,Chelidonium,majus,Grande chélidoine,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Papaveraceae,Papaver,ssp.,Coquelicots,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Anemone,nemorosa,Anémone sylvie,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Aquilegia,vulgaris,Ancolie commune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Caltha,palustris,Populage des marais,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Clematis,vitalba,Clématite des haies,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Ficaria,verna,Ficaire fausse-renoncule,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Ranunculus,fluitans,Renoncule flottante,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Ranunculus,repens,Renoncule rampante,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Buxales,Buxaceae,Buxus,sempervirens,Buis,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Saxifragales,Crassulaceae,Sedum,spp.,Orpins,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Saxifragales,Grossulariaceae,Ribes,spp.,Groseilliers,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Cytisus,scoparius,Genêt à balais,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Lathyrus,spp.,Gesses,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Lotus,corniculatus,Lotier corniculé,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Medicago,lupulina,Minette,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Medicago,sativa,Luzerne cultivée,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Robinia,pseudoacacia,Robinier faux-acacia,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Trifolium,pratense,Trèfle des prés,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Trifolium,repens,Trèfle rampant,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Trigonella,spp.,Mélilots,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fabales,Fabaceae,Vicia,spp.,Vesces,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Agrimonia,spp.,Aigremoines,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Alchemilla,spp.,Alchémilles,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Argentina,anserina,Potentille des oies,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Crataegus,laevigata,Aubépine à deux styles,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Crataegus,monogyna,Aubépine à un style,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Filipendula,ulmaria,Reine-des-prés,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Fragaria,vesca,Fraisier des bois,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Geum,urbanum,Benoîte commune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Malus,sylvestris,Pommier sauvage,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Potentilla,reptans,Potentille rampante,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Prunus,avium,Merisier,Rameau avec feuilles + écorce
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Prunus,padus,Cerisier à grappes,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Prunus,serotina,Cerisier tardif,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Prunus,spinosa,Prunellier,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Pyrus,communis pyraster,Poirier sauvage,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Rosa,canina,Églantier,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Rubus,idaeus,Framboisier,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Rubus,spp.,Ronces,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Sorbus,aucuparia,Sorbier des oiseleurs,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rhamnaceae,Frangula,alnus,Bourdaine,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Cannabaceae,Humulus,lupulus,Houblon,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Urticaceae,Urtica,dioica,Ortie dioïque,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Ulmaceae,Ulmus,spp.,Orme,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Fagaceae,Castanea,sativa,Châtaignier,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Fagaceae,Fagus,sylvatica,Hêtre,Rameau avec feuilles + écorce
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Fagaceae,Quercus,petraea,Chêne sessile,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Fagaceae,Quercus,robur,Chêne pédonculé,Rameau avec feuilles + écorce
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Fagaceae,Quercus,rubra,Chêne rouge d'Amérique,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Juglandaceae,Juglans,spp.,Noyers,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Betulaceae,Alnus,glutinosa,Aulne glutineux,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Betulaceae,Betula,pendula,Bouleau verruqueux,Rameau avec feuilles + écorce
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Betulaceae,Betula,pubescens,Bouleau pubescent,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Betulaceae,Carpinus,betulus,Charme,Rameau avec feuilles + écorce
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Fagales,Betulaceae,Corylus,avellana,Noisetier,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Celastrales,Celastraceae,Euonymus,europaeus,Fusain d'Europe,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Oxalidales,Oxalidaceae,Oxalis,acetosella,Surelle,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malpighiales,Hypericaceae,Hypericum,perforatum,Millepertuis perforé,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malpighiales,Violaceae,Viola,spp.,Violettes,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malpighiales,Salicaceae,Populus,tremula,Peuplier tremble,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malpighiales,Salicaceae,Populus,spp.,Peupliers,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malpighiales,Salicaceae,Salix,alba,Saule blanc,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malpighiales,Salicaceae,Salix,caprea,Saule marsault,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malpighiales,Euphorbiaceae,Euphorbia,amygdaloides,Euphorbe des bois,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malpighiales,Euphorbiaceae,Euphorbia,helioscopia,Euphorbe réveil-matin,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malpighiales,Euphorbiaceae,Mercurialis,annua,Mercuriale annuelle,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Geraniales,Geraniaceae,Geranium,robertianum,Herbe à Robert,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Myrtales,Lythraceae,Lythrum,salicaria,Salicaire commune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Myrtales,Onagraceae,Circaea,lutetiana,Circée de Paris,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Myrtales,Onagraceae,Epilobium,angustifolium,Épilobe à feuilles étroites,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Myrtales,Onagraceae,Epilobium,hirsutum,Épilobe hirsute,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Myrtales,Onagraceae,Oenothera,spp.,Onagres,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Sapindales,Sapindaceae,Acer,campestre,Érable champêtre,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Sapindales,Sapindaceae,Acer,platanoides,Érable plane,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Sapindales,Sapindaceae,Acer,pseudoplatanus,Érable sycomore,Rameau avec feuilles + écorce
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Sapindales,Sapindaceae,Aesculus,hippocastanum,Marronnier d'Inde,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malvales,Malvaceae,Tilia,cordata,Tilleul à petites feuilles,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Malvales,Malvaceae,Tilia,platyphyllos,Tilleul à larges feuilles,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Brassicales,Brassica ceae,Alliaria,petiolata,Alliaire officinale,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Brassicales,Brassica ceae,Capsella,bursa-pastoris,Bourse-à-pasteur,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Brassicales,Brassica ceae,Cardamine,amara,Cardamine amère,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Brassicales,Brassica ceae,Cardamine,pratensis,Cardamine des prés,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Brassicales,Brassica ceae,Thlaspi,arvense,Tabouret des champs,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Santalales,Santalaceae,Viscum,album,Gui,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Polygona cea,Persicaria,amphibia,Renouée amphibie,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Polygona cea,Persicaria,maculosa,Renouée persicaire,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Polygona cea,Reynoutria,japonica,Renouée du Japon,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Polygona cea,Rumex,spp.,Oseilles,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Droseraceae,Drosera,rotundifolia,Rossolis à feuilles rondes,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Caryophyllaceae,Lychnis,flos-cuculi,Fleur de coucou,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Caryophyllaceae,Silene,dioica,Compagnon rouge,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Caryophyllaceae,Silene,latifolia,Compagnon blanc,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Caryophyllaceae,Stellaria,holostea,Stellaire holostée,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Caryophyllaceae,Stellaria,media,Mouron des oiseaux,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Caryophyllales,Amaranthaceae,Salicornia,spp.,Salicornes,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Cornales,Cornaceae,Cornus,sanguinea,Cornouiller sanguin,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ericales,Balsaminaceae,Impatiens,glandulifera,Balsamine glanduleuse,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ericales,Balsaminaceae,Impatiens,noli-tangere,Balsamine des bois,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ericales,Primulaceae,Lysimachia,arvensis,Mouron rouge,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ericales,Primulaceae,Lysimachia,nummularia,Herbe aux écus,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ericales,Primulaceae,Primula,elatior,Primevère élevée,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ericales,Primulaceae,Primula,veris,Primevère officinale,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ericales,Ericaceae,Calluna,vulgaris,Callune,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ericales,Ericaceae,Vaccinium,myrtillus,Myrtille,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Gentianales,Rubiaceae,Cruciata,laevipes,Gaillet croisette,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Gentianales,Rubiaceae,Galium,aparine,Gaillet gratteron,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Gentianales,Rubiaceae,Galium,mollugo,Gaillet blanc,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Gentianales,Rubiaceae,Galium,odoratum,Aspérule odorante,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Gentianales,Apocynaceae,Vinca,minor,Petite pervenche,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Boraginales,Boraginaceae,Echium,vulgare,Vipérine commune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Boraginales,Boraginaceae,Pulmonaria,officinalis,Pulmonaire officinale,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Boraginales,Boraginaceae,Symphytum,officinale,Consoude officinale,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Solanales,Convolvulaceae,Convolvulus,arvensis,Liseron des champs,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Solanales,Convolvulaceae,Convolvulus,sepium,Liseron des haies,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Oleaceae,Fraxinus,excelsior,Frêne commun,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Oleaceae,Ligustrum,vulgare,Troène commun,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Plantaginaceae,Cymbalaria,muralis,Ruine de Rome,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Plantaginaceae,Digitalis,purpurea,Digitale pourpre,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Plantaginaceae,Linaria,vulgaris,Linaire commune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Plantaginaceae,Plantago,lanceolata,Plantain lancéolé,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Plantaginaceae,Plantago,major,Plantain à larges feuilles,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Plantaginaceae,Veronica,spp.,Véroniques,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Scrophulariaceae,Buddleja,davidii,Arbre aux papillons,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Scrophulariaceae,Scrophularia,nodosa,Scrofulaire noueuse,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Scrophulariaceae,Verbascum,thapsus,Bouillon blanc,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Lamiaceae,Ajuga,reptans,Bugle rampante,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Lamiaceae,Galeopsis,tetrahit,Galéopsis tétrahit,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Lamiaceae,Glechoma,hederacea,Lierre terrestre,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Lamiaceae,Lamium,album,Lamier blanc,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Lamiaceae,Lamium,galeobdolon,Lamier jaune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Lamiaceae,Lamium,purpureum,Lamier pourpre,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Lamiaceae,Prunella,vulgaris,Brunelle commune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Lamiaceae,Stachys,sylvatica,Épiaire des bois,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Lamiaceae,Teucrium,scorodonia,Germandrée scorodoine,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Lamiales,Orobanchaceae,Melampyrum,pratense,Mélampyre des prés,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Aquifoliales,Aquifoliaceae,Ilex,aquifolium,Houx,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Campanulaceae,Campanula,rotundifolia,Campanule à feuilles rondes,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Achillea,millefolium,Achillée millefeuille,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Arctium,spp.,Bardanes,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Artemisia,vulgaris,Armoise commune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Bellis,perennis,Pâquerette,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Cichorium,intybus,Chicorée sauvage,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Cirsium,spp.,Cirses,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Cyanus,segetum,Bleuet des champs,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Eupatorium,cannabinum,Eupatoire chanvrine,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Jacobaea,vulgaris,Séneçon jacobée,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Leucanthemum,vulgare,Grande marguerite,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Matricaria,discoidea,Matricaire discoïde,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Pilosella,officinarum,Épervière piloselle,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Senecio,vulgaris,Séneçon commun,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Sonchus,asper,Laiteron rude,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Tanacetum,vulgare,Tanaisie,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Taraxacum,spp.,Pissenlits,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Tragopogon,pratensis,Salsifis des prés,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Asterales,Asteraceae,Tussilago,farfara,Tussilage,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Dispacales,Adoxaceae,Sambucus,nigra,Sureau noir,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Dispacales,Adoxaceae,Sambucus,racemosa,Sureau à grappes,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Dispacales,Adoxaceae,Viburnum,lantana,Viorne mancienne,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Dispacales,Adoxaceae,Viburnum,opulus,Viorne obier,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Dispacales,Caprifoliaceae,Dipsacus,fullonum,Cabaret des oiseaux,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Dispacales,Caprifoliaceae,Lonicera,periclymenum,Chèvrefeuille des bois,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Dispacales,Caprifoliaceae,Symphoricarpos,albus,Symphorine blanche,Rameau avec feuilles
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Dispacales,Caprifoliaceae,Valeriana,officinalis,Valériane officinale,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Apiales,Apiaceae,Angelica,sylvestris,Angélique sauvage,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Apiales,Apiaceae,Anthriscus,sylvestris,Cerfeuil sauvage,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Apiales,Apiaceae,Daucus,carota,Carotte sauvage,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Apiales,Apiaceae,Heracleum,mantegazzianum,Berce du Caucase,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Apiales,Apiaceae,Heracleum,sphondylium,Berce commune,Plante en fleur
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Apiales,Araliaceae,Hedera,helix,Lierre (grimpant),Rameau avec feuilles
+Animalia,Annelida,Clitellata (Hirudinea),Arhynchobdellida,Erpobdel lidae,Erpobdella,spp.,Erpobdelles (sangsues),Adulte
+Animalia,Annelida,Clitellata (Oligochaeta),Haplotaxida,Enchytraeidae,,,Enchytréides,Adulte
+Animalia,Annelida,Clitellata (Oligochaeta),Haplotaxida,Lumbricidae,,,Lombrics,Adulte
+Animalia,Annelida,Clitellata (Oligochaeta),Haplotaxida,Naididae,Tubifex,tubifex,Ver de vase,Adulte
+Animalia,Mollusca,Gastropoda,Hygrophiles,Lymnaeidae,Lymnaea,stagnalis,Grande limnée,Adulte + coquille
+Animalia,Mollusca,Gastropoda,Hygrophiles,Planorbidae,Ancylus,fluviatilis,Ancyle,Adulte + coquille
+Animalia,Mollusca,Gastropoda,Hygrophiles,Planorbidae,Planorbarius,spp.,Planorbes,Adulte + coquille
+Animalia,Mollusca,Gastropoda,Stylommato phores,Discidae,Discus,rotundatus,Bouton commun,Adulte + coquille
+Animalia,Mollusca,Gastropoda,Stylommato phores,Limacidae,Limax,maximus,Limace léopard,Adulte
+Animalia,Mollusca,Bivalvia,Unionides,Unionidae,Anodonta,anatina,Anodonte des rivières,Adulte + coquille
+Animalia,Arthropoda (Chelicerata),Arachnida,Pseudoscorpionida,,,,Pseudoscorpions,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Opiliones,,,,Opilions,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Acari,,,,Acariens,Adulte
+Animalia,Arthropoda (Myriapoda),Chilopoda,Lithobiomorpha,,,,Lithobies,Adulte
+Animalia,Arthropoda (Myriapoda),Chilopoda,Scolopendromorpha,,,,Scolopendres,Adulte
+Animalia,Arthropoda (Myriapoda),Chilopoda,Geophilomorpha,,,,Géophiles,Adulte
+Animalia,Arthropoda (Myriapoda),Diplopoda,Glomerida,Glomeridae,,,Gloméris,Adulte
+Animalia,Arthropoda (Myriapoda),Diplopoda,Julida,,,,Iules,Adulte
+Animalia,Arthropoda (Myriapoda),Diplopoda,Polydesmida,Polydesmidae,,,Polydesmes,Adulte
+Animalia,Arthropoda (Crustacea),Malacostraca,Decapoda,Astacidae,Pacifastacus,leniusculus,Écrevisse signal,Adulte
+Animalia,Arthropoda (Crustacea),Malacostraca,Amphipoda,Gammari dae,Gammarus,spp.,Gammares,Adulte
+Animalia,Arthropoda (Crustacea),Malacostraca,Isopoda (Assellota),Asellidae,Asellus,spp.,Aselles,Adulte
+Animalia,Arthropoda (Crustacea),Malacostra ca,Isopoda (Oniscidea),,,,Cloportes,Adulte
+Animalia,Arthropoda (hexapoda),Entognatha,Collembola (Entomobryomorpha),Entomobryidae,Orchesella,spp.,Orcheselles,Adulte
+Animalia,Arthropoda (hexapoda),Entognatha,Collembola (Symphypleona),,,,Symphypléones,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Amaurobiidae,Amaurobius,spp.,Amaurobes,Adulte + toile
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Segestriidae,Segestria,spp.,Ségestries,Toile
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Pholcidae,Pholcus,phalangioides,Pholque phalangiste,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Liocranidae,Agroeca,spp.,Agroecas,Cocon
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Thomisidae,Misumena,vatia,Misumène variable,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Thomisidae,Xysticus,spp.,Xystiques,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Salticidae,,,Saltiques,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Lycosidae,Pardosa,spp.,Lycoses,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Pisauridae,Pisaura,mirabilis,Pisaure admirable,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Agelenidae,Tegenaria,spp.,Tégénaires,Adulte + toile
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Tetragnathidae,Metellina,segmentata,Méta d'automne,Adulte + toile
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Tetragnathidae,Tetragnatha,spp.,Tétragnathes,Adulte + toile
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Araneidae,Argiope,bruennichi,Argiope fasciée,Femelle + toile
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Araneidae,Araneus,diadematus,Épeire diadème,Adulte
+Animalia,Arthropoda (Chelicerata),Arachnida,Araneae,Linyphiidae,Linyphia,triangularis,Linyphie triangulaire,Adulte + toile
+Animalia,Arthropoda (hexapoda),Insecta,Microcoryphia,Machilidae,,,Machilis,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Zygentoma,Lepismatidae,Lepisma,saccharina,Poisson d'argent,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Ephemerida,Ephemeridae,Ephemera,danica,Mouche de mai,Adulte + juvénile
+Animalia,Arthropoda (hexapoda),Insecta,Odonata (Anisoptera),Aeschnidae,Aeshna,spp.,Aeschnes,Adulte + juvénile + exuvie
+Animalia,Arthropoda (hexapoda),Insecta,Odonata (Anisoptera),Aeschnidae,Anax,imperator,Anax empereur,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Odonata (Anisoptera),Libellulidae,Sympetrum,spp.,Sympétrums,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Odonata (Zygoptera),Calopterigidae,Calopteryx,spp.,Caloptéryx,Adulte + juvénile + exuvie
+Animalia,Arthropoda (hexapoda),Insecta,Odonata (Zygoptera),Coenagrionidae,,,Agrions,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Plecoptera,Perlidae,,,Perles,Adulte + juvénile
+Animalia,Arthropoda (hexapoda),Insecta,Mantodea,Mantidae,Mantis,religiosa,Mante religieuse,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Blattodea,Ectobiidae,Ectobius,spp.,Blattes,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Orthoptera (Cælifera),Acrididae,Oedipoda,caerulescens,Criquet à ailes bleues,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Orthoptera (Cælifera),Acrididae,Pseudochorthippus,parallelus,Criquet des pâtures,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Orthoptera (Ensifera),Gryllidae,Nemobius,sylvestris,Grillon des bois,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Orthoptera (Ensifera),Tettigoniidae,Tettigonia,viridissima,Grande sauterelle verte,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Orthoptera (Ensifera),Tettigoniidae,Pholidoptera,griseoaptera,Decticelle cendrée,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Dermaptera,Forficulidae,Forficula,auricularia,Perce-oreille commun,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Thysanoptera,Phlaeothripidae,,,Thrips,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Sternorrhyncha),Aphididae,,,Pucerons,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Cicadomorpha),Cercopidae,Cercopis,vulnerata,Cercope sanguin,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Cicadomorpha),Aphrophoridae,Philaenus,spumarius,Philène spumeuse,Adulte + crachat
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Heteroptera),Notonectidae,,,Notonectes,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Heteroptera),Gerridae,,,Gerris,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Heteroptera),Nepidae,Nepa,cinerea,Nèpe cendrée,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Heteroptera),Pyrrhocoridae,Pyrrhocoris,apterus,Gendarme,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Heteroptera),Coreidae,Coreus,marginatus,Corée marginé,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Heteroptera),Pentatomidae,Rhaphigaster,nebulosa,Punaise nébuleuse,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Heteroptera),Pentatomidae,Graphosoma,italicum,Punaise arlequin,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hemiptera (Heteroptera),Miridae,,,Miridés,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Megaloptera,Sialidae,Sialis,lutaria,Sialis de la vase,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Neuroptera,Chrysopidae,,,Chrysopes,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Raphidioidea,Raphidiidae,,,Raphidies,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Carabidae,Cicindela,campestris,Cicindèle champêtre,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Carabidae,,,Carabes,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Dytiscidae,,,Dytiques,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Gyrinidae,,,Gyrins,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Staphylinidae,,,Staphylins,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Silphidae,,,Nécrophores,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Geotrupidae,,,Géotrupes,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Lucanidae,Dorcus,parallelipipedus,Petite biche,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Scarabaeidae,Melolontha,melolontha,Hanneton commun,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Scarabaeidae,Cetonia,aurata,Cétoine dorée,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Scarabaeidae,Trichius,spp.,Trichies,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Elateridae,,,Taupins,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Cantharidae,,,Cantharides,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Coccinellidae,Harmonia,axyridis,Coccinelle asiatique,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Coccinellidae,Coccinella,septempunctata,Coccinelle à sept points,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Meloidae,,,Méloés,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Oedemeridae,,,Œdémères,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Chrysomelidae,,,Chrysomèles,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Cerambycidae,,,Longicornes,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Attelabidae,,,Cigariers,Adulte + traces
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Curculionidae,,,Charançons,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Coleoptera,Scolytinae,,,Scolytes,Adulte + traces
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Symphyta),Tenthredinidae,,,Tenthrèdes,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Ichneumonidae,,,Ichneumons,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Cynipidae,Biorhiza,pallida,Cynips de la pomme de chêne,Galle
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Cynipidae,Cynips,quercusfolii,Cynips de la galle-cerise du chêne,Galle
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Cynipidae,Diplolepis,rosae,Cynips du rosier/Bédégar,Galle
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Vespidae,,,Guêpes,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Vespidae,Vespa,crabro,Frelon européen,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Formicidae,,,Fourmis,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Apidae,Apis,mellifera,Abeille domestique,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Apidae,,,Bourdons,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Hymenoptera (Apocrita),Megachilidae,,,Osmies,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Mecoptera,Panorpidae,,,Panorpes,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Nematocera),Tipulidae,,,Tipules,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Nematocera),Culicidae,,,Moustiques,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Nematocera),Bibionidae,,,Mouche de la Saint-Marc,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Brachycera),Tabanidae,,,Taons,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Brachycera),Bombyliidae,,,Bombyles,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Brachycera),Asilidae,,,Asiles,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Brachycera),Empididae,,,Empidides,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Brachycera),Syrphidae,,,Syrphes,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Brachycera),Calliphoridae,,,Mouches vertes,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Brachycera),Scathophagidae,,,Mouches stercoraires,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Brachycera),Sarcophagidae,,,Mouches à damier,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Diptera (Brachycera),Tachinidae,,,Tachinaires,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Trichoptera,Phryganeidae,,,Phryganes,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Nepticulidae,Stigmella,aurella,Nepticule dorée,Mine larvaire
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Adelidae,,,Adèles,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Psychidae,Psyche,casta,Psyché lustrée,Larve
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Yponomeutidae,,,Yponomeutes,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Zygaenidae,,,Zygènes,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Papilionidae,Papilio,machaon,Machaon,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Hesperiidae,Ochlodes,sylvanus,Sylvaine,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Lycaenidae,Polyommatus,icarus,Azuré commun,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Nymphalidae,Aglais,io,Paon-du-jour,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Nymphalidae,Aglais,urticae,Petite tortue,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Nymphalidae,Vanessa,cardui,Belle-dame,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Nymphalidae,Pararge,aegeria,Tircis,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Pieridae,Pieris,spp.,Piérides,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Geometridae,,,Géomètres,Adulte + larve
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Arctiidae,Euplagia,quadripunctaria,Écaille chinée,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Noctuidae,,,Noctuelles,Adulte
+Animalia,Arthropoda (hexapoda),Insecta,Lepidoptera,Sphingidae,Macroglossum,stellatarum,Moro-sphinx,Adulte
+Animalia,Chordata,Chondrichthyes,Carcharhini formes,Scyliorhinidae,Scyliorhinus,canicula,Petite roussette,Adulte + capsule de l'œuf
+Animalia,Chordata,Chondrichthyes,Rajiformes,Rajidae,Raja,clavata,Raie bouclée,Adulte + capsule de l'œuf
+Animalia,Chordata,Osteichthyes,Anguilliformes,Anguillidae,Anguilla,anguilla,Anguille euro péenne,Adulte
+Animalia,Chordata,Osteichthyes,Cypriniformes,Cyprinidae,Barbus,barbus,Barbeau commun,Adulte
+Animalia,Chordata,Osteichthyes,Cypriniformes,Leuciscidae,Abramis,brama,Brème commune,Adulte
+Animalia,Chordata,Osteichthyes,Cypriniformes,Leuciscidae,Squalius,cephalus,Chevaine commun,Adulte
+Animalia,Chordata,Osteichthyes,Esociformes,Esocidae,Esox,lucius,Brochet,Adulte
+Animalia,Chordata,Osteichthyes,Salmoniformes,Salmonidae,Salmo,salar,Saumon atlantique,Adulte
+Animalia,Chordata,Osteichthyes,Salmoniformes,Salmonidae,Salmo,trutta,Truite fario,Adulte
+Animalia,Chordata,Osteichthyes,Salmoniformes,Salmonidae,Thymallus,thymallus,Ombre commun,Adulte
+Animalia,Chordata,Osteichthyes,Pleuronecti formes,Pleuronec tidae,Platichthys,flesus,Flet d'Europe,Adulte
+Animalia,Chordata,Osteichthyes,Scorpeni formes,Cottidae,Cottus,gobio,Chabot commun,Adulte
+Animalia,Chordata,Amphibia,Urodela,Salamandridae,Salamandra,salamandra,Salamandre tachetée,Adulte + larve
+Animalia,Chordata,Amphibia,Urodela,Salamandridae,Ichthyosaura,alpestris,Triton alpestre,Adulte
+Animalia,Chordata,Amphibia,Urodela,Salamandridae,Lissotriton,helveticus,Triton palmé,Mâle nuptial
+Animalia,Chordata,Amphibia,Urodela,Salamandridae,Lissotriton,vulgaris,Triton ponctué,Mâle nuptial
+Animalia,Chordata,Amphibia,Anura,Bufonidae,Bufo,bufo,Crapaud commun,Adulte + ponte
+Animalia,Chordata,Amphibia,Anura,Ranidae,Pelophylax,spp.,Grenouilles vertes,Adulte
+Animalia,Chordata,Amphibia,Anura,Ranidae,Rana,temporaria,Grenouille rousse,Adulte + ponte
+Animalia,Chordata,Reptilia,Squamata (Lacertilia),Lacertidae,Podarcis,,Lézards,Adulte
+Animalia,Chordata,Reptilia,Squamata (Anguimorpha),Anguidae,Anguis,fragilis,Orvet fragile,Adulte
+Animalia,Chordata,Reptilia,Squamata (Serpentes),Natricidae,Natrix,helvetica,Couleuvre helvétique,Adulte + ponte
+Animalia,Chordata,Reptilia,Squamata (Serpentes),Vipéridae,Vipera,berus,Vipère péliade,Adulte
+Animalia,Chordata,Aves,Anseriformes,Anatidae,Alopochen,aegyptiaca,Ouette d’Égypte,Adulte
+Animalia,Chordata,Aves,Anseriformes,Anatidae,Anas,platyrhynchos,Canard colvert,Mâle nuptial
+Animalia,Chordata,Aves,Anseriformes,Anatidae,Aythya,fuligula,Fuligule morillon,Mâle adulte
+Animalia,Chordata,Aves,Anseriformes,Anatidae,Branta,canadensis,Bernache du Canada,Adulte
+Animalia,Chordata,Aves,Anseriformes,Anatidae,Cygnus,olor,Cygne tuberculé,Adulte
+Animalia,Chordata,Aves,Podicipediformes,Podicipedidae,Podiceps,cristatus,Grèbe huppé,Adulte nuptial
+Animalia,Chordata,Aves,Pelecaniformes,Phalacrocora cidae,Phalacrocorax,carbo,Grand cormoran,Adulte
+Animalia,Chordata,Aves,Ciconiiformes,Ardeidae,Ardea,cinerea,Héron cendré,Adulte
+Animalia,Chordata,Aves,Ciconiiformes,Ciconiidae,Ciconia,ciconia,Cigogne blanche,Adulte
+Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Accipiter,nisus,Épervier d’Europe,Adulte
+Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Buteo,buteo,Buse variable,Adulte
+Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Milvus,milvus,Milan royal,Adulte
+Animalia,Chordata,Aves,Falconiformes,Falconidae,Falco,tinnunculus,Faucon crécerelle,Adulte
+Animalia,Chordata,Aves,Gruiformes,Rallidae,Fulica,atra,Foulque macroule,Adulte
+Animalia,Chordata,Aves,Gruiformes,Rallidae,Gallinula,chloropus,Gallinule poule-d’eau,Adulte
+Animalia,Chordata,Aves,Charadriiformes,Haematopo didae,Haematopus,ostralegus,Huîtrier pie,Adulte
+Animalia,Chordata,Aves,Charadriiformes,Charadriidae,Vanellus,vanellus,Vanneau huppé,Adulte
+Animalia,Chordata,Aves,Charadriiformes,Laridae,Chroicocephalus,ridibundus,Mouette rieuse,Adulte nuptial
+Animalia,Chordata,Aves,Charadriiformes,Laridae,Larus,spp.,Goélands,Adulte nuptial
+Animalia,Chordata,Aves,Columbiformes,Columbidae,Columba,livia,Pigeon biset domestique,Adulte
+Animalia,Chordata,Aves,Columbiformes,Columbidae,Columba,palumbus,Pigeon ramier,Adulte
+Animalia,Chordata,Aves,Columbiformes,Columbidae,Streptopelia,decaocto,Tourterelle turque,Adulte
+Animalia,Chordata,Aves,Psittaciformes,Psittaculidae,Psittacula,krameri,Perruche à collier,Adulte
+Animalia,Chordata,Aves,Strigiformes,Tytonidae,Tyto,alba,Effraie des clochers,Adulte
+Animalia,Chordata,Aves,Strigiformes,Strigidae,Athene,noctua,Chevêche d’Athéna,Adulte
+Animalia,Chordata,Aves,Strigiformes,Strigidae,Strix,aluco,Chouette hulotte,Adulte
+Animalia,Chordata,Aves,Apodiformes,Apodidae,Apus,apus,Martinet noir,Adulte
+Animalia,Chordata,Aves,Coraciiformes,Alcedinidae,Alcedo,atthis,Martin-pêcheur d’Europe,Adulte
+Animalia,Chordata,Aves,Piciformes,Picidae,Dendrocopos,major,Pic épeiche,Adulte
+Animalia,Chordata,Aves,Piciformes,Picidae,Picus,viridis,Pic vert,Adulte
+Animalia,Chordata,Aves,Passeriformes,Alaudidae,Alauda,arvensis,Alouette des champs,Adulte
+Animalia,Chordata,Aves,Passeriformes,Hirundinidae,Delichon,urbicum,Hirondelle de fenêtre,Adulte + nid
+Animalia,Chordata,Aves,Passeriformes,Hirundinidae,Hirundo,rustica,Hirondelle rustique,Adulte + nid
+Animalia,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,alba,Bergeronnette grise,Adulte nuptial
+Animalia,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,flava,Bergeronnette printanière,Mâle nuptial
+Animalia,Chordata,Aves,Passeriformes,Prunellidae,Prunella,modularis,Accenteur mouchet,Adulte
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Erithacus,rubecula,Rougegorge familier,Adulte
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Phoenicurus,ochruros,Rougequeue noir,Mâle nuptial
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Saxicola,rubicola,Tarier pâtre,Mâle nuptial
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Turdus,merula,Merle noir,Adulte
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Turdus,philomelos,Grive musicienne,Adulte + enclume
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Turdus,pilaris,Grive litorne,Adulte
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Turdus,viscivorus,Grive draine,Adulte
+Animalia,Chordata,Aves,Passeriformes,Sylviidae,Sylvia,atricapilla,Fauvette à tête noire,Adulte nuptial
+Animalia,Chordata,Aves,Passeriformes,Phylloscopidae,Phylloscopus,collybita,Pouillot véloce,Adulte
+Animalia,Chordata,Aves,Passeriformes,Regulidae,Regulus,spp.,Roitelets,Adulte
+Animalia,Chordata,Aves,Passeriformes,Troglodytidae,Troglodytes,troglodytes,Troglodyte mignon,Adulte
+Animalia,Chordata,Aves,Passeriformes,Paridae,Cyanistes,caeruleus,Mésange bleue,Adulte
+Animalia,Chordata,Aves,Passeriformes,Paridae,Parus,major,Mésange charbon nière,Adulte
+Animalia,Chordata,Aves,Passeriformes,Aegithalidae,Aegithalos,caudatus,Orite à longue queue,Adulte
+Animalia,Chordata,Aves,Passeriformes,Sittidae,Sitta,europaea,Sittelle torchepot,Adulte + forge
+Animalia,Chordata,Aves,Passeriformes,Certhiidae,Certhia,spp.,Grimpereaux,Adulte
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,corone,Corneille noire,Adulte
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,frugilegus,Corbeau freux,Adulte
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Coloeus,monedula,Choucas des tours,Adulte
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Garrulus,glandarius,Geai des chênes,Adulte
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Pica,pica,Pie bavarde,Adulte + nid
+Animalia,Chordata,Aves,Passeriformes,Sturnidae,Sturnus,vulgaris,Étourneau sanson net,Adulte
+Animalia,Chordata,Aves,Passeriformes,Passeridae,Passer,domesticus,Moineau domes tique,Adulte
+Animalia,Chordata,Aves,Passeriformes,Fringillidae,Carduelis,carduelis,Chardonneret élégant,Adulte
+Animalia,Chordata,Aves,Passeriformes,Fringillidae,Chloris,chloris,Verdier d’Europe,Mâle nuptial
+Animalia,Chordata,Aves,Passeriformes,Fringillidae,Coccothraustes,coccothraustes,Grosbec casse-noyaux,Adulte
+Animalia,Chordata,Aves,Passeriformes,Fringillidae,Fringilla,coelebs,Pinson des arbres,Mâle nuptial
+Animalia,Chordata,Aves,Passeriformes,Fringillidae,Linaria,cannabina,Linotte mélodieuse,Mâle nuptial
+Animalia,Chordata,Aves,Passeriformes,Fringillidae,Pyrrhula,pyrrhula,Bouvreuil pivoine,Mâle adulte
+Animalia,Chordata,Aves,Passeriformes,Emberizidae,Emberiza,citrinella,Bruant jaune,Mâle nuptial
+Animalia,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,europaeus,Lièvre d'Europe,Adulte + piste dans neige
+Animalia,Chordata,Mammalia,Lagomorpha,Leporidae,Oryctolagus,cuniculus,Lapin de garenne,Adulte
+Animalia,Chordata,Mammalia,Rodentia,Castoridae,Castor,fiber,Castor d'Europe,Adulte + bois rongés
+Animalia,Chordata,Mammalia,Rodentia,Cricetidae,Microtus,spp.,Campagnols,Adulte + noisette + monticule
+Animalia,Chordata,Mammalia,Rodentia,Cricetidae,Ondatra,zibethicus,Rat musqué,Adulte
+Animalia,Chordata,Mammalia,Rodentia,Echimyidae,Myocastor,coypus,Ragondin,Adulte
+Animalia,Chordata,Mammalia,Rodentia,Gliridae,Muscardinus,avellanarius,Muscardin,Adulte + noisette
+Animalia,Chordata,Mammalia,Rodentia,Muridae,Apodemus,spp.,Mulots,Adulte + noisette + cône
+Animalia,Chordata,Mammalia,Rodentia,Muridae,Rattus,norvegicus,Surmulot,Adulte
+Animalia,Chordata,Mammalia,Rodentia,Muridae,Rattus,rattus,Rat noir,Adulte
+Animalia,Chordata,Mammalia,Rodentia,Sciuriae,Sciurus,vulgaris,Écureuil roux,Adulte + noisette + cône
+Animalia,Chordata,Mammalia,Primates,Hominidae,Homo,sapiens,Être humain,Adulte + nombreux indices
+Animalia,Chordata,Mammalia,Eulipotyphles,Erinaceidae,Erinaceus,europaeus,Hérisson commun,Adulte
+Animalia,Chordata,Mammalia,Eulipotyphles,Soricidae,Sorex,spp.,Musaraignes,Adulte
+Animalia,Chordata,Mammalia,Eulipotyphles,Talpidae,Talpa,europaea,Taupe,Adulte + taupinière
+Animalia,Chordata,Mammalia,Chiroptera,Vespertilionidae,,,Chauves-souris,Adulte
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Vulpes,vulpes,Renard roux,Adulte + empreintes + laissées
+Animalia,Chordata,Mammalia,Carnivora,Phocidae,,,Phoques,Adulte
+Animalia,Chordata,Mammalia,Carnivora,Procyonidae,Procyon,lotor,Raton laveur,Adulte + empreintes
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Martes,foina,Fouine,Adulte + laissées
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Meles,meles,Blaireau d'Europe,Adulte
+Animalia,Chordata,Mammalia,Artiodactyla,Suidae,Sus,scrofa,Sanglier,Adulte + empreintes + déjections + vermillis/ boutis
+Animalia,Chordata,Mammalia,Ruminantia,Cervidae,Cervus,elaphus,Cerf élaphe,Adulte + empreintes + fumées
+Animalia,Chordata,Mammalia,Ruminantia,Cervidae,Capreolus,capreolus,Chevreuil européen,Adulte + empreintes + moquettes
+Fungi,Ascomycota,,,,Morchella,spp.,Morilles,Sporophore
+Fungi,Ascomycota,,,,Aleuria,spp.,Pezizes,Sporophore
+Fungi,Ascomycota,,,,Tuber,uncinatum,Truffe de Bourgogne,Sporophore
+Fungi,Ascomycota,,,,Xylaria,hypoxylon,Xylaire du bois,Sporophore
+Fungi,Basidiomycota,,,,Agaricus,spp.,Agarics,Sporophore
+Fungi,Basidiomycota,,,,Amanita,spp.,Amanites,Sporophore
+Fungi,Basidiomycota,,,,Armillaria,spp.,Armillaires,Sporophore
+Fungi,Basidiomycota,,,,Boletus,spp.,Bolets,Sporophore
+Fungi,Basidiomycota,,,,Calocera,viscosa,Calocère visqueuse,Sporophore
+Fungi,Basidiomycota,,,,Cantharellus,cibarius,Girolle,Sporophore
+Fungi,Basidiomycota,,,,Clitocybe,spp.,Clitocybes,Sporophore
+Fungi,Basidiomycota,,,,Coprinus,spp.,Coprins,Sporophore
+Fungi,Basidiomycota,,,,Cortinarius,spp.,Cortinaires,Sporophore
+Fungi,Basidiomycota,,,,Craterellus,cornucopioides,Trompette de la mort,Sporophore
+Fungi,Basidiomycota,,,,Hydnum,repandum,Pied-de-mouton,Sporophore
+Fungi,Basidiomycota,,,,Hypholoma,fasciculare,Hypholome en touffes,Sporophore
+Fungi,Basidiomycota,,,,Inocybe,spp.,Inocybes,Sporophore
+Fungi,Basidiomycota,,,,Kuehneromyces,mutabilis,Pholiote changeante,Sporophore
+Fungi,Basidiomycota,,,,Laccaria,amethystina,Laccaire améthyste,Sporophore
+Fungi,Basidiomycota,,,,Lactarius,spp.,Lactaires,Sporophore
+Fungi,Basidiomycota,,,,Lepiota,spp.,Lépiotes,Sporophore
+Fungi,Basidiomycota,,,,Lepista,nuda,Pied bleu,Sporophore
+Fungi,Basidiomycota,,,,Lycoperdon,perlatum,Lycoperdon perlé,Sporophore
+Fungi,Basidiomycota,,,,Mycena,spp.,Mycènes,Sporophore
+Fungi,Basidiomycota,,,,Paxillus,spp.,Paxilles,Sporophore
+Fungi,Basidiomycota,,,,Phallus,impudicus,Satyre puant,Sporophore
+Fungi,Basidiomycota,,,,Pleurotus,spp.,Pleurotes,Sporophore
+Fungi,Basidiomycota,,,,Pluteus,spp.,Plutées,Sporophore
+Fungi,Basidiomycota,,,,Laetiporus,spp.,Polypores,Sporophore
+Fungi,Basidiomycota,,,,Russula,spp.,Russules,Sporophore
+Fungi,Basidiomycota,,,,Scleroderma,spp.,Sclérodermes,Sporophore
+Fungi,Basidiomycota,,,,Stereum,hirsutum,Stérée hirsute,Sporophore
+Fungi,Basidiomycota,,,,Stropharia,aeruginosa,Strophaire vert-de-gris,Sporophore
+Fungi,Basidiomycota,,,,Tremella,mesenterica,Trémelle mésentérique,Sporophore
+Fungi,Basidiomycota,,,,Tricholoma,spp.,Tricholomes,Sporophore
+Fungi,Basidiomycota,,,,Volvariella,spp.,Volvaires,Sporophore
+Fungi,Ascolichen,,,,,,Type morphologique crustacé et lépreux,Partie végétative
+Fungi,Ascolichen,,,,,,Type morphologique foliacé,Partie végétative
+Fungi,Ascolichen,,,,,,Type morphologique fruticuleux,Partie végétative
+Fungi,Ascolichen,,,,,,Type morphologique complexe (ou composé),Partie végétative

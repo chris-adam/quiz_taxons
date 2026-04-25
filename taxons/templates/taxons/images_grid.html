@@ -1,20 +1,21 @@
 <div class="images-grid">
     {% for image in images %}
         <div class="image-container">
-            {% if "xeno-canto" in image.image_context_link %}
-                <audio controls>
-                    <source src="{{ image.link }}" type="audio/mpeg">
-                </audio>
-            {% else %}
-                <a href="{{ image.image_context_link }}"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    <img src="{{ image.link }}" alt="{{ image.title }}" loading="lazy">
-                </a>
-            {% endif %}
+            <a href="{{ image.image_context_link }}"
+               target="_blank"
+               rel="noopener noreferrer">
+                <img src="{{ image.link }}" alt="{{ image.title }}" loading="lazy">
+            </a>
         </div>
     {% endfor %}
 </div>
+{% if song %}
+<div class="song-container" style="text-align: center;">
+    <audio controls>
+        <source src="{{ song.link }}" type="audio/mpeg">
+    </audio>
+</div>
+{% endif %}
 <div class="controls">
     <form method="post" style="display: inline;">
         <input type="hidden" name="action" value="add_image">
@@ -23,11 +24,11 @@
                 hx-target="#images"
                 hx-post="{% url 'images_grid' taxon.id %}"
                 {% if images|length >= 4 %}disabled{% endif %}>
-            {% if taxon.classe == "Aves" %}🎵{% else %}📸{% endif %} Ajouter
+            📸 Ajouter
             {% if images|length <= 2 %}
-                1 indice
+                1 photo
             {% else %}
-                2 indices
+                2 photos
             {% endif %}
             ({{ images|length }}/4)
         </button>

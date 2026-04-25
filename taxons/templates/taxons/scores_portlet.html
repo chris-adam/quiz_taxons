@@ -1,0 +1,34 @@
+<aside id="scores-portlet" class="portlet"{% if oob %} hx-swap-oob="true"{% endif %}>
+    <h2>🏆 Mes scores</h2>
+    {% if top_scores or bottom_scores %}
+    <table class="scores-table">
+        <thead>
+            <tr>
+                <th>Taxon</th>
+                <th style="text-align:right">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for us in top_scores %}
+            <tr>
+                <td>{{ us.taxon.nom_vernaculaire }}</td>
+                <td class="score-value">{{ us.score }}</td>
+            </tr>
+            {% endfor %}
+            {% if bottom_scores %}
+            <tr class="scores-separator">
+                <td colspan="2">...</td>
+            </tr>
+            {% for us in bottom_scores %}
+            <tr>
+                <td>{{ us.taxon.nom_vernaculaire }}</td>
+                <td class="score-value">{{ us.score }}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="portlet-empty">Aucun score pour l'instant.<br>Répondez à des questions pour voir vos progrès !</p>
+    {% endif %}
+</aside>

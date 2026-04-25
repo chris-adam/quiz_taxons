@@ -23,13 +23,126 @@
             padding: 20px;
         }
 
-        .container {
-            max-width: 1200px;
+        .page-wrapper {
+            max-width: 1560px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .container {
             background: white;
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            align-self: start;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .portlet {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .portlet h2 {
+            color: #2d3748;
+            font-size: 1.1em;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .category-filter h2 {
+            color: #2d3748;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .category-filter a {
+            display: block;
+            padding: 6px 10px;
+            text-decoration: none;
+            color: #4a5568;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.4;
+            transition: background 0.15s;
+        }
+
+        .category-filter a:hover {
+            background: #edf2f7;
+        }
+
+        .category-filter a.active {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .scores-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .scores-table th {
+            text-align: left;
+            color: #718096;
+            font-weight: 600;
+            padding: 4px 6px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .scores-table td {
+            padding: 5px 6px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #2d3748;
+        }
+
+        .scores-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .scores-separator td {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 11px;
+            padding: 8px 0;
+            letter-spacing: 0.05em;
+        }
+
+        .score-value {
+            font-weight: 700;
+            text-align: right;
+            color: #667eea;
+            white-space: nowrap;
+        }
+
+        .portlet-empty {
+            color: #a0aec0;
+            font-size: 13px;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 900px) {
+            .page-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
         }
 
         h1 {
@@ -151,7 +264,6 @@
             font-size: 14px;
         }
 
-        .input-group input,
         .input-group select {
             width: 100%;
             padding: 12px;
@@ -162,14 +274,9 @@
             background: white;
         }
 
-        .input-group input:focus,
         .input-group select:focus {
             outline: none;
             border-color: #667eea;
-        }
-
-        .taxonomy-select {
-            cursor: pointer;
         }
 
         .propositions {
@@ -230,6 +337,35 @@
             gap: 10px;
             margin-bottom: 20px;
         }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            color: #718096;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer .footer-row {
+            margin-bottom: 4px;
+        }
+
+        footer .socials {
+            display: inline-flex;
+            gap: 12px;
+            margin-left: 6px;
+        }
         </style>
         {% htmx_script %}
         <script src="//unpkg.com/alpinejs" defer></script>
@@ -237,6 +373,7 @@
 
     </head>
     <body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
+        <div class="page-wrapper">
         <div class="container">
             <h1>🌿 Quiz Taxons 🌿</h1>
             <div class="quiz-section">
@@ -253,20 +390,24 @@
                     </div>
                     <div id="free-input-form">
                         <h2>Quel est ce taxon ?</h2>
-                        <form method="post" id="taxonomy-form">
+                        <form id="answer-form">
                             {% csrf_token %}
-                            <input type="hidden" name="action" value="submit_answer">
-                            <div id="taxonomy-container"
-                                 hx-get="{% url 'taxonomy_options' %}"
-                                 hx-trigger="load"
-                                 hx-swap="innerHTML"></div>
+                            <div class="input-group">
+                                <label for="answer-select">Nom vernaculaire</label>
+                                <select id="answer-select" name="answer" required>
+                                    <option value="" disabled selected>— Choisir une espèce —</option>
+                                    {% for name in nom_vernaculaire_list %}
+                                        <option value="{{ name }}">{{ name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                             <button type="submit"
                                     id="submit-btn"
                                     class="btn btn-secondary"
                                     hx-post="{% url 'submit_answer' %}"
                                     hx-target=".result-container"
                                     hx-swap="outerHTML"
-                                    hx-vals='js:{"answer": document.querySelector("#nom_vernaculaire")?.value || ""}'
+                                    hx-include="#answer-form"
                                     hx-on:click="this.disabled = true">Valider ma réponse</button>
                         </form>
                     </div>
@@ -274,7 +415,6 @@
                         <h2>Choisissez la bonne réponse :</h2>
                         <form method="post">
                             {% csrf_token %}
-                            <input type="hidden" name="action" value="submit_answer">
                             <div class="propositions">
                                 {% for prop in propositions %}
                                     <label class="proposition-item">
@@ -305,6 +445,33 @@
                 </div>
                 <p class="info-text">💡 Astuce : Vous pouvez demander jusqu'à 4 images pour vous aider !</p>
             </div>
+            <footer>
+                <div class="footer-row">
+                    Créé par Chris ADAM
+                    <span class="socials">
+                        <a href="https://github.com/chris-adam" target="_blank" rel="noopener">GitHub</a>
+                        <a href="mailto:chris.adam.contact@gmail.com">Email</a>
+                    </span>
+                </div>
+                <div class="footer-row">
+                    Photos : <a href="https://www.inaturalist.org" target="_blank" rel="noopener">iNaturalist</a>
+                    &nbsp;·&nbsp;
+                    Chants d'oiseaux : <a href="https://www.xeno-canto.org" target="_blank" rel="noopener">Xeno-canto</a>
+                </div>
+                <div class="footer-row">Aucune donnée personnelle n'est collectée.</div>
+            </footer>
+        </div>
+        <div class="sidebar">
+            <div class="portlet category-filter">
+                <h2>🔍 Catégorie</h2>
+                <a href="/" class="{% if not category %}active{% endif %}">Tous</a>
+                {% for cat in categories %}
+                    <a href="/?category={{ cat|urlencode }}"
+                       class="{% if category == cat %}active{% endif %}">{{ cat }}</a>
+                {% endfor %}
+            </div>
+            {% include 'taxons/scores_portlet.html' %}
+        </div>
         </div>
         <script>
         function showPropositions() {

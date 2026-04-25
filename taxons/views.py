@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from taxons.models import SearchResult
 from taxons.models import Taxon
 from taxons.models import UserScore
@@ -10,116 +11,137 @@ import requests
 import secrets
 
 
+CATEGORIES = [
+    "Oiseaux",
+    "Plantes",
+    "Insectes",
+    "Araignées",
+    "Annélides, mollusques et arthropodes, hors araignées et insectes",
+    "Mammifères",
+    "Amphibiens et reptiles",
+    "Poissons",
+    "Mousses, hépatiques, sphaignes, fougères et prêles",
+    "Champignons",
+    "Lichens",
+]
+
+
+def get_score_lists(session_id, category=""):
+    qs = UserScore.objects.filter(session_id=session_id)
+    if category:
+        qs = qs.filter(taxon__category=category)
+    all_scores = qs.select_related("taxon").order_by("-score", "-updated_at")
+    top_scores = list(all_scores[:10])
+    top_ids = [s.id for s in top_scores]
+    bottom_scores = list(
+        qs.exclude(id__in=top_ids)
+        .select_related("taxon")
+        .order_by("score", "-updated_at")[:10]
+    )
+    return top_scores, bottom_scores
+
+
 def get_or_create_session_id(request):
-    """Get or create a session ID for the user"""
     if not request.session.get("user_session_id"):
         request.session["user_session_id"] = secrets.token_urlsafe(32)
     return request.session["user_session_id"]
 
 
-def get_next_taxon(session_id):
-    """
-    Select next taxon based on lowest score.
-    Prioritize taxons the user has never seen (score 0) or struggled with.
-    """
-    # Get all user scores for this session
-    user_scores = UserScore.objects.filter(session_id=session_id)
+def get_next_taxon(session_id, category=""):
+    qs = Taxon.objects.all()
+    if category:
+        qs = qs.filter(category=category)
 
-    # Get all taxon IDs and their scores
+    user_scores = UserScore.objects.filter(session_id=session_id)
     scored_taxon_ids = {score.taxon_id: score.score for score in user_scores}
 
-    # Get all taxons
-    all_taxons = list(Taxon.objects.all())
-
-    # Create a list of (taxon, score) tuples
+    all_taxons = list(qs)
     taxon_scores = []
     for taxon in all_taxons:
-        score = scored_taxon_ids.get(taxon.id, 0)  # Default score is 0 for unseen taxons
+        score = scored_taxon_ids.get(taxon.id, 0)
         taxon_scores.append((taxon, score))
 
-    # Find the minimum score
     if taxon_scores:
         min_score = min(score for _, score in taxon_scores)
-        # Get all taxons with the minimum score
         lowest_scoring_taxons = [taxon for taxon, score in taxon_scores if score == min_score]
-        # Randomly select one
         return random.choice(lowest_scoring_taxons)
 
     return None
 
 
 def index(request):
-    # Ensure user has a session ID
     session_id = get_or_create_session_id(request)
 
-    # Clean up session
+    category = request.GET.get("category", "")
+
+    # Reset current question when category changes
+    if category != request.session.get("current_category", ""):
+        for key in ("current_taxon_id", "search_results_ids", "current_score", "current_song_id"):
+            request.session.pop(key, None)
+    request.session["current_category"] = category
+
+    # Clean up session for fresh question
     request.session.pop("current_taxon_id", None)
     request.session.pop("search_results_ids", None)
     request.session.pop("current_score", None)
+    request.session.pop("current_song_id", None)
 
-    # Get or create current taxon
-    taxon_id = request.session.get("current_taxon_id")
-    if not taxon_id:
-        taxon = get_next_taxon(session_id)
-        if not taxon:
-            return render(request, "taxons/index.html", {"error": "No taxons available."})
-        request.session["current_taxon_id"] = taxon.id
-        request.session["current_score"] = 10  # Start with max score
-    else:
-        taxon = Taxon.objects.get(id=taxon_id)
+    taxon = get_next_taxon(session_id, category)
+    if not taxon:
+        return render(request, "taxons/index.html", {"error": "No taxons available."})
+    request.session["current_taxon_id"] = taxon.id
+    request.session["current_score"] = 10
 
-    # Generate 4 propositions (including the correct answer)
-    # Prioritize taxons from the same taxonomic levels for harder quiz
+    # Generate propositions from same category (taxonomy-level fallback within category)
+    base_qs = Taxon.objects.all()
+    if category:
+        base_qs = base_qs.filter(category=category)
+
     wrong_choices = []
-
-    # Try to get taxons from same genus (if available)
     if taxon.genre:
-        same_genus = list(Taxon.objects.filter(genre=taxon.genre).exclude(id=taxon.id))
-        wrong_choices.extend(same_genus)
-
-    # If not enough, get from same family
+        wrong_choices.extend(list(base_qs.filter(genre=taxon.genre).exclude(id=taxon.id)))
     if len(wrong_choices) < 3 and taxon.famille:
-        same_family = list(
-            Taxon.objects.filter(famille=taxon.famille)
+        wrong_choices.extend(list(
+            base_qs.filter(famille=taxon.famille)
             .exclude(id=taxon.id)
             .exclude(id__in=[t.id for t in wrong_choices])
-        )
-        wrong_choices.extend(same_family)
-
-    # If still not enough, get from same order
+        ))
     if len(wrong_choices) < 3 and taxon.ordre:
-        same_order = list(
-            Taxon.objects.filter(ordre=taxon.ordre).exclude(id=taxon.id).exclude(id__in=[t.id for t in wrong_choices])
-        )
-        wrong_choices.extend(same_order)
-
-    # If still not enough, get from same class
-    if len(wrong_choices) < 3 and taxon.classe:
-        same_class = list(
-            Taxon.objects.filter(classe=taxon.classe).exclude(id=taxon.id).exclude(id__in=[t.id for t in wrong_choices])
-        )
-        wrong_choices.extend(same_class)
-
-    # If still not enough, get from same embranchement
-    if len(wrong_choices) < 3 and taxon.embranchement:
-        same_embranchement = list(
-            Taxon.objects.filter(embranchement=taxon.embranchement)
+        wrong_choices.extend(list(
+            base_qs.filter(ordre=taxon.ordre)
             .exclude(id=taxon.id)
             .exclude(id__in=[t.id for t in wrong_choices])
-        )
-        wrong_choices.extend(same_embranchement)
-
-    # If still not enough, get random taxons
+        ))
+    if len(wrong_choices) < 3 and taxon.classe:
+        wrong_choices.extend(list(
+            base_qs.filter(classe=taxon.classe)
+            .exclude(id=taxon.id)
+            .exclude(id__in=[t.id for t in wrong_choices])
+        ))
+    if len(wrong_choices) < 3 and taxon.embranchement:
+        wrong_choices.extend(list(
+            base_qs.filter(embranchement=taxon.embranchement)
+            .exclude(id=taxon.id)
+            .exclude(id__in=[t.id for t in wrong_choices])
+        ))
     if len(wrong_choices) < 3:
-        random_taxons = list(
-            Taxon.objects.exclude(id=taxon.id).exclude(id__in=[t.id for t in wrong_choices]).order_by("?")
-        )
-        wrong_choices.extend(random_taxons)
+        wrong_choices.extend(list(
+            base_qs.exclude(id=taxon.id)
+            .exclude(id__in=[t.id for t in wrong_choices])
+            .order_by("?")
+        ))
 
-    # Select 3 wrong choices randomly from the pool
     selected_wrong = random.sample(wrong_choices, min(3, len(wrong_choices)))
     propositions = [taxon.nom_vernaculaire] + [t.nom_vernaculaire for t in selected_wrong]
     random.shuffle(propositions)
+
+    # Answer dropdown: all nom_vernaculaire in category, alphabetical
+    nv_qs = Taxon.objects.all()
+    if category:
+        nv_qs = nv_qs.filter(category=category)
+    nom_vernaculaire_list = list(nv_qs.order_by("nom_vernaculaire").values_list("nom_vernaculaire", flat=True))
+
+    top_scores, bottom_scores = get_score_lists(session_id, category)
 
     return render(
         request,
@@ -127,14 +149,17 @@ def index(request):
         {
             "taxon": taxon,
             "propositions": propositions,
+            "top_scores": top_scores,
+            "bottom_scores": bottom_scores,
+            "category": category,
+            "categories": CATEGORIES,
+            "nom_vernaculaire_list": nom_vernaculaire_list,
         },
     )
 
 
 def fetch_images_for_taxon(taxon):
-    """Fetch verified observations with photos from iNaturalist near Belgium."""
-
-    if taxon.espece and taxon.espece != "spp.":
+    if taxon.espece and "spp." not in taxon.espece and "ssp." not in taxon.espece:
         scientific_name = f"{taxon.genre} {taxon.espece}"
     elif taxon.genre:
         scientific_name = taxon.genre
@@ -196,20 +221,30 @@ def fetch_images_for_taxon(taxon):
 
 
 def fetch_sounds_for_taxon(taxon):
-    """Fetch bird song recordings from Xeno-canto for Belgian observations."""
-    if taxon.espece and taxon.espece != "spp.":
-        query = f"gen:{taxon.genre} sp:{taxon.espece} cnt:Belgium type:song"
+    if taxon.espece and "spp." not in taxon.espece and "ssp." not in taxon.espece:
+        species_query = f"gen:{taxon.genre} sp:{taxon.espece}"
     elif taxon.genre:
-        query = f"gen:{taxon.genre} cnt:Belgium type:song"
+        species_query = f"gen:{taxon.genre}"
     else:
         return
 
+    queries = [
+        f"{species_query} cnt:Belgium type:song",
+        f"{species_query} cnt:Belgium",
+        f"{species_query} cnt:France type:song",
+        f"{species_query} cnt:France",
+    ]
+
     try:
-        resp = requests.get(
-            "https://xeno-canto.org/api/3/recordings",
-            params={"query": query, "key": settings.XENOCANTO_API_KEY},
-            timeout=15,
-        ).json()
+        resp = None
+        for query in queries:
+            resp = requests.get(
+                "https://xeno-canto.org/api/3/recordings",
+                params={"query": query, "key": settings.XENOCANTO_API_KEY},
+                timeout=15,
+            ).json()
+            if resp.get("recordings"):
+                break
         for recording in resp.get("recordings", [])[:30]:
             file_url = recording.get("file", "")
             if not file_url:
@@ -228,51 +263,53 @@ def fetch_sounds_for_taxon(taxon):
 
 
 def render_images_grid(request, taxon_id):
-    """Render image grid for a given taxon (for HTMX requests)"""
-
     taxon = Taxon.objects.get(id=taxon_id)
+    is_bird = taxon.classe == "Aves"
 
-    # Fetch or create search results
-    search_results = taxon.search_results.all()
-    if not search_results:
-        if taxon.classe == "Aves":
+    if not taxon.search_results.exists():
+        if is_bird:
             fetch_sounds_for_taxon(taxon)
         fetch_images_for_taxon(taxon)
-        search_results = taxon.search_results.all()
 
-    if not search_results:
+    if not taxon.search_results.exists():
         return HttpResponse(f"Aucun résultat trouvé pour ce taxon (id={taxon.id}).", status=404)
 
+    photos = taxon.search_results.exclude(image_context_link__contains="xeno-canto")
+
     if request.method == "POST":
-        # Deduct 2 points for requesting more images
         if "current_score" in request.session:
             request.session["current_score"] -= 2
 
         search_results_ids = request.session.setdefault("search_results_ids", [])
         current_count = len(search_results_ids)
         if current_count == 1:
-            more_images = taxon.search_results.exclude(id__in=search_results_ids).order_by("?")[:1]
+            more_images = photos.exclude(id__in=search_results_ids).order_by("?")[:1]
         elif current_count == 2:
-            more_images = taxon.search_results.exclude(id__in=search_results_ids).order_by("?")[:2]
+            more_images = photos.exclude(id__in=search_results_ids).order_by("?")[:2]
         else:
             more_images = []
         request.session["search_results_ids"].extend([img.id for img in more_images])
         request.session.modified = True
     else:
-        request.session["search_results_ids"] = [search_results.order_by("?").first().id]
+        first_photo = photos.order_by("?").first()
+        request.session["search_results_ids"] = [first_photo.id] if first_photo else []
+        if is_bird:
+            song = taxon.search_results.filter(image_context_link__contains="xeno-canto").order_by("?").first()
+            if song:
+                request.session["current_song_id"] = song.id
 
-    try:
-        images = SearchResult.objects.filter(id__in=request.session["search_results_ids"], taxon=taxon)
-        return render(request, "taxons/images_grid.html", {"images": images, "taxon": taxon})
-    except Taxon.DoesNotExist:
-        return HttpResponse("Taxon not found.", status=404)
+    song = None
+    if is_bird:
+        song = SearchResult.objects.filter(id=request.session.get("current_song_id")).first()
+
+    images = SearchResult.objects.filter(id__in=request.session["search_results_ids"], taxon=taxon)
+    return render(request, "taxons/images_grid.html", {"images": images, "song": song, "taxon": taxon})
 
 
 def render_result(request):
-    """Render result snippet for HTMX requests"""
     session_id = get_or_create_session_id(request)
+    category = request.session.get("current_category", "")
 
-    # Check answer
     taxon_id = request.session.get("current_taxon_id")
     if taxon_id:
         taxon = Taxon.objects.get(id=taxon_id)
@@ -282,36 +319,27 @@ def render_result(request):
         if not user_answer:
             result = {}
         elif user_answer == correct_answer:
-            # Get current score and save it
             current_score = request.session.get("current_score", 10)
-
-            # Update or create user score
             user_score, created = UserScore.objects.get_or_create(
                 session_id=session_id, taxon=taxon, defaults={"score": current_score}
             )
             if not created:
-                # Add to existing score
                 user_score.score += current_score
                 user_score.save()
-
             result = {
                 "class": "correct",
                 "message": f"✅ Correct ! C'est bien {taxon.nom_vernaculaire} ({taxon.genre} {taxon.espece})",
             }
         else:
-            # Wrong answer - deduct 5 points from the guessed taxon
-            try:
-                guessed_taxon = Taxon.objects.get(nom_vernaculaire=request.POST.get("answer", "").strip())
+            guessed_taxon = Taxon.objects.filter(nom_vernaculaire=request.POST.get("answer", "").strip()).first()
+            if guessed_taxon:
                 user_score, created = UserScore.objects.get_or_create(
-                    session_id=session_id, taxon=guessed_taxon, defaults={"score": -1}
+                    session_id=session_id, taxon=guessed_taxon, defaults={"score": 0}
                 )
                 if not created:
-                    user_score.score = max(-1, user_score.score - 5)
+                    user_score.score = max(0, user_score.score - 5)
                     user_score.save()
-            except Taxon.DoesNotExist:
-                # User entered a taxon that doesn't exist in database, ignore
-                pass
-
+            UserScore.objects.get_or_create(session_id=session_id, taxon=taxon, defaults={"score": 0})
             result = {
                 "class": "incorrect",
                 "message": f"❌ Incorrect. La réponse était : {taxon.nom_vernaculaire} ({taxon.genre} {taxon.espece})",
@@ -322,225 +350,24 @@ def render_result(request):
             "message": "❌ No active question",
         }
 
-    return render(request, "taxons/result.html", {"result": result})
+    top_scores, bottom_scores = get_score_lists(session_id, category)
+    result_html = render_to_string("taxons/result.html", {"result": result, "category": category}, request=request)
+    portlet_html = render_to_string(
+        "taxons/scores_portlet.html",
+        {"top_scores": top_scores, "bottom_scores": bottom_scores, "oob": True},
+        request=request,
+    )
+    return HttpResponse(result_html + portlet_html)
 
 
 def show_propositions(request):
-    """Deduct points when user requests propositions (HTMX endpoint)"""
     request.session["current_score"] -= 5
     request.session.modified = True
-    return HttpResponse(status=204)  # No content response
+    return HttpResponse(status=204)
 
 
 def skip_question(request):
-    """Skip current question and reset session"""
     request.session.pop("current_taxon_id", None)
     request.session.pop("search_results_ids", None)
     request.session.pop("current_score", None)
     return HttpResponse(status=200, headers={"HX-Refresh": "true"})
-
-
-def get_taxonomy_options(request):
-    """Get options for all taxonomy levels based on current selections"""
-    level = request.GET.get("level", "")
-    regne = request.GET.get("regne", "")
-    embranchement = request.GET.get("embranchement", "")
-    classe = request.GET.get("classe", "")
-    ordre = request.GET.get("ordre", "")
-    famille = request.GET.get("famille", "")
-    genre = request.GET.get("genre", "")
-    espece = request.GET.get("espece", "")
-    nom_vernaculaire = request.GET.get("nom_vernaculaire", "")
-
-    # When a level changes, reset all levels below it and fill upper levels if needed
-    if level == "regne":
-        embranchement = classe = ordre = famille = genre = espece = nom_vernaculaire = ""
-    elif level == "embranchement":
-        classe = ordre = famille = genre = espece = nom_vernaculaire = ""
-    elif level == "classe":
-        ordre = famille = genre = espece = nom_vernaculaire = ""
-    elif level == "ordre":
-        famille = genre = espece = nom_vernaculaire = ""
-    elif level == "famille":
-        genre = espece = nom_vernaculaire = ""
-    elif level == "genre":
-        espece = nom_vernaculaire = ""
-    elif level == "espece":
-        nom_vernaculaire = ""
-    elif level == "nom_vernaculaire":
-        # Fill in all upper levels from the selected nom_vernaculaire
-        if nom_vernaculaire:
-            taxon = Taxon.objects.filter(nom_vernaculaire=nom_vernaculaire).first()
-            if taxon:
-                regne = taxon.regne
-                embranchement = taxon.embranchement
-                classe = taxon.classe
-                ordre = taxon.ordre
-                famille = taxon.famille
-                genre = taxon.genre
-                espece = taxon.espece
-
-    # If a lower level is selected, auto-fill upper levels
-    if espece and not genre:
-        taxon = Taxon.objects.filter(espece=espece).first()
-        if taxon:
-            regne = taxon.regne
-            embranchement = taxon.embranchement
-            classe = taxon.classe
-            ordre = taxon.ordre
-            famille = taxon.famille
-            genre = taxon.genre
-
-    if genre and not famille:
-        taxon = Taxon.objects.filter(genre=genre).first()
-        if taxon:
-            regne = taxon.regne
-            embranchement = taxon.embranchement
-            classe = taxon.classe
-            ordre = taxon.ordre
-            famille = taxon.famille
-
-    if famille and not ordre:
-        taxon = Taxon.objects.filter(famille=famille).first()
-        if taxon:
-            regne = taxon.regne
-            embranchement = taxon.embranchement
-            classe = taxon.classe
-            ordre = taxon.ordre
-
-    if ordre and not classe:
-        taxon = Taxon.objects.filter(ordre=ordre).first()
-        if taxon:
-            regne = taxon.regne
-            embranchement = taxon.embranchement
-            classe = taxon.classe
-
-    if classe and not embranchement:
-        taxon = Taxon.objects.filter(classe=classe).first()
-        if taxon:
-            regne = taxon.regne
-            embranchement = taxon.embranchement
-
-    if embranchement and not regne:
-        taxon = Taxon.objects.filter(embranchement=embranchement).first()
-        if taxon:
-            regne = taxon.regne
-
-    # Build base query
-    query = Taxon.objects.all()
-    if regne:
-        query = query.filter(regne=regne)
-    if embranchement:
-        query = query.filter(embranchement=embranchement)
-    if classe:
-        query = query.filter(classe=classe)
-    if ordre:
-        query = query.filter(ordre=ordre)
-    if famille:
-        query = query.filter(famille=famille)
-    if genre:
-        query = query.filter(genre=genre)
-    if espece:
-        query = query.filter(espece=espece)
-
-    # Get options for each level
-    context = {
-        "regne": regne,
-        "embranchement": embranchement,
-        "classe": classe,
-        "ordre": ordre,
-        "famille": famille,
-        "genre": genre,
-        "espece": espece,
-        "nom_vernaculaire": nom_vernaculaire,
-    }
-
-    # Always show all regnes
-    context["regne_options"] = list(
-        Taxon.objects.values_list("regne", flat=True).distinct().exclude(regne="").order_by("regne")
-    )
-
-    # Show embranchements for selected regne (or all if none selected)
-    emb_query = Taxon.objects.all()
-    if regne:
-        emb_query = emb_query.filter(regne=regne)
-    context["embranchement_options"] = list(
-        emb_query.values_list("embranchement", flat=True).distinct().exclude(embranchement="").order_by("embranchement")
-    )
-
-    # Show classes for selected regne/embranchement
-    classe_query = Taxon.objects.all()
-    if regne:
-        classe_query = classe_query.filter(regne=regne)
-    if embranchement:
-        classe_query = classe_query.filter(embranchement=embranchement)
-    context["classe_options"] = list(
-        classe_query.values_list("classe", flat=True).distinct().exclude(classe="").order_by("classe")
-    )
-
-    # Show ordres for selected upper levels
-    ordre_query = Taxon.objects.all()
-    if regne:
-        ordre_query = ordre_query.filter(regne=regne)
-    if embranchement:
-        ordre_query = ordre_query.filter(embranchement=embranchement)
-    if classe:
-        ordre_query = ordre_query.filter(classe=classe)
-    context["ordre_options"] = list(
-        ordre_query.values_list("ordre", flat=True).distinct().exclude(ordre="").order_by("ordre")
-    )
-
-    # Show familles
-    famille_query = Taxon.objects.all()
-    if regne:
-        famille_query = famille_query.filter(regne=regne)
-    if embranchement:
-        famille_query = famille_query.filter(embranchement=embranchement)
-    if classe:
-        famille_query = famille_query.filter(classe=classe)
-    if ordre:
-        famille_query = famille_query.filter(ordre=ordre)
-    context["famille_options"] = list(
-        famille_query.values_list("famille", flat=True).distinct().exclude(famille="").order_by("famille")
-    )
-
-    # Show genres
-    genre_query = Taxon.objects.all()
-    if regne:
-        genre_query = genre_query.filter(regne=regne)
-    if embranchement:
-        genre_query = genre_query.filter(embranchement=embranchement)
-    if classe:
-        genre_query = genre_query.filter(classe=classe)
-    if ordre:
-        genre_query = genre_query.filter(ordre=ordre)
-    if famille:
-        genre_query = genre_query.filter(famille=famille)
-    context["genre_options"] = list(
-        genre_query.values_list("genre", flat=True).distinct().exclude(genre="").order_by("genre")
-    )
-
-    # Show especes
-    espece_query = Taxon.objects.all()
-    if regne:
-        espece_query = espece_query.filter(regne=regne)
-    if embranchement:
-        espece_query = espece_query.filter(embranchement=embranchement)
-    if classe:
-        espece_query = espece_query.filter(classe=classe)
-    if ordre:
-        espece_query = espece_query.filter(ordre=ordre)
-    if famille:
-        espece_query = espece_query.filter(famille=famille)
-    if genre:
-        espece_query = espece_query.filter(genre=genre)
-    context["espece_options"] = list(
-        espece_query.values_list("espece", flat=True).distinct().exclude(espece="").order_by("espece")
-    )
-
-    # Show nom_vernaculaire (final selection)
-    context["nom_vernaculaire_options"] = list(
-        query.values_list("nom_vernaculaire", flat=True).distinct().order_by("nom_vernaculaire")
-    )
-
-    return render(request, "taxons/taxonomy_select.html", context)
