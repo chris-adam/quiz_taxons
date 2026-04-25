@@ -12,6 +12,7 @@ class Taxon(models.Model):
     nom_vernaculaire = models.CharField(max_length=200)
     partie_etat_indice = models.CharField(max_length=200)
     category = models.CharField(max_length=200, blank=True, db_index=True)
+    dataset = models.CharField(max_length=50, db_index=True, default="")
 
     last_update = models.DateTimeField(
         blank=True, null=True, help_text="Date de la dernière mise à jour des résultats de recherche d'images"
