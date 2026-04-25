@@ -79,6 +79,16 @@ CATEGORY_MAP = {
     "Troglodyte mignon": "Oiseaux",
     "Vanneau huppé": "Oiseaux",
     "Verdier d’Europe": "Oiseaux",
+    "Bergeronnette des ruisseaux": "Oiseaux",
+    "Cincle plongeur": "Oiseaux",
+    "Grand Cormoran": "Oiseaux",
+    "Grande Aigrette": "Oiseaux",
+    "Hirondelle des fenêtres": "Oiseaux",
+    "Martin-pêcheur d’Europe": "Oiseaux",
+    "Mésange charbonnière": "Oiseaux",
+    "Pic noir": "Oiseaux",
+    "Roitelet huppé": "Oiseaux",
+    "Roitelet triple-bandeau": "Oiseaux",
 
     # Plantes
     "Achillée millefeuille": "Plantes",
@@ -275,6 +285,29 @@ CATEGORY_MAP = {
     "Viorne mancienne": "Plantes",
     "Viorne obier": "Plantes",
     "Vipérine commune": "Plantes",
+    "Aubépine sp.": "Plantes",
+    "Chêne rouge": "Plantes",
+    "Cornouiller sp.": "Plantes",
+    "Epicéa": "Plantes",
+    "Frêne élevé": "Plantes",
+    "Houx commun": "Plantes",
+    "Sureau sp.": "Plantes",
+    "Genévrier": "Plantes",
+    "Mélèze d'Europe": "Plantes",
+    "Pin noir": "Plantes",
+    "Aconit tue-loup": "Plantes",
+    "Alchémille vert jaunâtre": "Plantes",
+    "Campanule sp.": "Plantes",
+    "Dompte-venin": "Plantes",
+    "Epilobe en épi": "Plantes",
+    "Grande Consoude": "Plantes",
+    "Hellébore fétide": "Plantes",
+    "Orchis de Fuchs": "Plantes",
+    "Orchis mâle": "Plantes",
+    "Plantain majeur": "Plantes",
+    "Silène enflé": "Plantes",
+    "Silène penché": "Plantes",
+    "Silène rouge": "Plantes",
 
     # Insectes
     "Abeille domestique": "Insectes",
@@ -373,6 +406,13 @@ CATEGORY_MAP = {
     "Trichies": "Insectes",
     "Yponomeutes": "Insectes",
     "Zygènes": "Insectes",
+    "Coléoptères": "Insectes",
+    "Diptères": "Insectes",
+    "Éphéméroptères": "Insectes",
+    "Hémiptères": "Insectes",
+    "Hyménoptères": "Insectes",
+    "Lépidoptères": "Insectes",
+    "Zygoptères et Anisoptères": "Insectes",
 
     # Araignées
     "Agroecas": "Araignées",
@@ -443,6 +483,8 @@ CATEGORY_MAP = {
     "Sanglier": "Mammifères",
     "Surmulot": "Mammifères",
     "Taupe": "Mammifères",
+    "Blaireau européen": "Mammifères",
+    "Martre": "Mammifères",
 
     # Amphibiens et reptiles
     "Couleuvre helvétique": "Amphibiens et reptiles",
@@ -481,6 +523,11 @@ CATEGORY_MAP = {
     "Prêle des champs": "Mousses, hépatiques, sphaignes, fougères et prêles",
     "Rue des murailles": "Mousses, hépatiques, sphaignes, fougères et prêles",
     "Sphaignes": "Mousses, hépatiques, sphaignes, fougères et prêles",
+    "Fausse-capillaire": "Mousses, hépatiques, sphaignes, fougères et prêles",
+    "Fougère mâle": "Mousses, hépatiques, sphaignes, fougères et prêles",
+    "Polypode vulgaire": "Mousses, hépatiques, sphaignes, fougères et prêles",
+    "Polystic à aiguillons": "Mousses, hépatiques, sphaignes, fougères et prêles",
+    "Scolopendre": "Mousses, hépatiques, sphaignes, fougères et prêles",
 
     # Champignons
     "Agarics": "Champignons",
@@ -604,7 +651,7 @@ class Command(BaseCommand):
             raise CommandError(f"Cannot determine scientific name for: {row.get('Nom vernaculaire')}")
 
         if self.inaturalist_last_call and (datetime.now() - self.inaturalist_last_call).total_seconds() < 1:
-            time.sleep(1)  # Respect iNaturalist rate limit of 1 request per second
+            time.sleep(2)  # Respect iNaturalist rate limit of 1 request per second
         self.inaturalist_last_call = datetime.now()
         try:
             resp = requests.get(
@@ -640,7 +687,7 @@ class Command(BaseCommand):
         resp = None
         for query in queries:
             if self.xenocanto_last_call and (datetime.now() - self.xenocanto_last_call).total_seconds() < 1:
-                time.sleep(1)
+                time.sleep(2)  # Respect Xeno-canto rate limit of 1 request per second
             self.xenocanto_last_call = datetime.now()
             try:
                 resp = requests.get(
@@ -744,14 +791,3 @@ class Command(BaseCommand):
                 f"\nImport complete! Total created: {total_created}, updated: {total_updated}"
             )
         )
-
-# Corrections nature :
-# Valeriana rupens -> Valeriana officinalis
-# Enchytreidae -> Enchytraeidae
-# Phrygaenidae -> Phryganeidae
-# Forficularia -> Forficula
-# Phlaeotripidae -> Phlaeothripidae
-# Corvus monedula -> Coloeusmonedula
-
-# Corrections rando :
-# Chêne rouge Quercus robur -> Chêne rouge Quercus rubra

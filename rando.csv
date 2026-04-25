@@ -40,7 +40,7 @@ Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Martes,martes,Martre,
 Animalia,Chordata,Mammalia,Carnivora,Canidae,Vulpes,vulpes,Renard roux,
 Animalia,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,alba,Bergeronnette grise,chant
 Animalia,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,cinerea,Bergeronnette des ruisseaux,chant
-Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,monedula,Choucas des tours,chant
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Coloeus,monedula,Choucas des tours,chant
 Animalia,Chordata,Aves,Strigiformes,Strigidae,Strix,aluco,Chouette hulotte,chant
 Animalia,Chordata,Aves,Passeriformes,Cinclidae,Cinclus,cinclus,Cincle plongeur,chant
 Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,frugilegus,Corbeau freux,chant
@@ -48,10 +48,10 @@ Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,corone,Corneille noire,chan
 Animalia,Chordata,Aves,Passeriformes,Sylviidae,Sylvia,atricapilla,Fauvette à tête noire,chant
 Animalia,Chordata,Aves,Passeriformes,Corvidae,Garrulus,glandarius,Geai des chênes,chant
 Animalia,Chordata,Aves,Pelecaniformes,Phalacrocoracidae,Phalacrocorax,carbo,Grand Cormoran,
-Animalia,Chordata,Aves,Ciconiiformes,Ardeidae,Casmerodius,albus,Grande Aigrette,
+Animalia,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,alba,Grande Aigrette,
 Animalia,Chordata,Aves,Podicipediformes,Podicipedidae,Podiceps,cristatus,Grèbe huppé,
 Animalia,Chordata,Aves,Passeriformes,Turdidae,Turdus,philomelos,Grive musicienne,chant
-Animalia,Chordata,Aves,Ciconiiformes,Ardeidae,Ardea,cinerea,Héron cendré,chant
+Animalia,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,cinerea,Héron cendré,chant
 Animalia,Chordata,Aves,Passeriformes,Hirundinidae,Delichon,urbicum,Hirondelle des fenêtres,
 Animalia,Chordata,Aves,Passeriformes,Hirundinidae,Hirundo,rustica,Hirondelle rustique,
 Animalia,Chordata,Aves,Apodiformes,Apodidae,Apus,apus,Martinet noir,chant
@@ -72,7 +72,7 @@ Animalia,Chordata,Aves,Columbiformes,Columbidae,Streptopelia,decaocto,Tourterell
 Animalia,Chordata,Aves,Passeriformes,Troglodytidae,Troglodytes,troglodytes,Troglodyte mignon,chant
 Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Aconitum,vulparia,Aconit tue-loup,
 Plantae,Spermatophyta (Magnoliophyta),Liliopsida,Asparagales,Amaryllidaceae,Allium,ursinum,Ail des ours,
-Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Alchemilla,xantochlora,Alchémille vert jaunâtre,
+Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Rosales,Rosaceae,Alchemilla,xanthochlora,Alchémille vert jaunâtre,
 Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Aquilegia,vulgaris,Ancolie commune,
 Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Ranunculales,Ranunculaceae,Anemone,nemorosa,Anémone sylvie,
 Plantae,Spermatophyta (Magnoliophyta),Magnoliopsida,Apiales,Apiaceae,Heracleum,sphondylium,Berce commune,

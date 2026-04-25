@@ -165,6 +165,14 @@ def index(request):
 
     top_scores, bottom_scores = get_score_lists(session_id, dataset=dataset, category=category)
 
+    existing_categories = set(
+        Taxon.objects.filter(dataset=dataset)
+        .exclude(category="")
+        .values_list("category", flat=True)
+        .distinct()
+    )
+    categories = [c for c in CATEGORIES if c in existing_categories]
+
     return render(
         request,
         "taxons/index.html",
@@ -175,7 +183,7 @@ def index(request):
             "bottom_scores": bottom_scores,
             "dataset": dataset,
             "category": category,
-            "categories": CATEGORIES,
+            "categories": categories,
             "nom_vernaculaire_list": nom_vernaculaire_list,
         },
     )

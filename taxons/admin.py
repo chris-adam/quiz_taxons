@@ -1,8 +1,7 @@
-from django.contrib import admin
-
 from .models import SearchResult
 from .models import Taxon
 from .models import UserScore
+from django.contrib import admin
 
 
 @admin.register(Taxon)
@@ -16,9 +15,9 @@ class TaxonAdmin(admin.ModelAdmin):
         "classe",
         "embranchement",
         "regne",
-        "last_update",
+        "dataset",
     )
-    list_filter = ("regne", "classe", "ordre", "famille")
+    list_filter = ("category", "dataset")
     search_fields = ("nom_vernaculaire", "genre", "espece", "famille")
     ordering = ("nom_vernaculaire",)
     readonly_fields = ("last_update",)
