@@ -1,8 +1,8 @@
 Règne,Embranchement (Sous-embranchement),Classe,Ordre (Sous-ordre),Famille,Genre,Espèce,Nom vernaculaire,Partie/état/indice à reconnaitre
-Plantae,Hepatica,Marchantiopsida,,,,,Hépatiques à feuilles,Partie végétative
-Plantae,Hepatica,Marchantiopsida,,,,,Hépatiques à thalle,Partie végétative
-Plantae,Bryophyta,Bryopsida,,,,,Mousses acrocarpes,Partie végétative
-Plantae,Bryophyta,Bryopsida,,,,,Mousses pleurocarpes,Partie végétative
+Plantae,Marchantiophyta,Jungermanniopsida,,,,,Hépatiques à feuilles,Partie végétative
+Plantae,Marchantiophyta,Marchantiopsida,,,,,Hépatiques à thalle,Partie végétative
+Plantae,Bryophyta,Bryopsida,Dicranales,,,,Mousses acrocarpes,Partie végétative
+Plantae,Bryophyta,Bryopsida,Hypnales,,,,Mousses pleurocarpes,Partie végétative
 Plantae,Bryophyta,Sphagnopsida,,,,,Sphaignes,Partie végétative
 Plantae,Pteridophyta,Polypodiodsida,Equisetales,Equisetaceae,Equisetum,arvense,Prêle des champs,Partie végétative
 Plantae,Pteridophyta,Polypodiodsida,Polypodiales,Aspleniaceae,Asplenium,ruta-muraria,Rue des murailles,Partie végétative
@@ -487,7 +487,7 @@ Fungi,Basidiomycota,,,,Stropharia,aeruginosa,Strophaire vert-de-gris,Sporophore
 Fungi,Basidiomycota,,,,Tremella,mesenterica,Trémelle mésentérique,Sporophore
 Fungi,Basidiomycota,,,,Tricholoma,spp.,Tricholomes,Sporophore
 Fungi,Basidiomycota,,,,Volvariella,spp.,Volvaires,Sporophore
-Fungi,Ascolichen,,,,,,Type morphologique crustacé et lépreux,Partie végétative
-Fungi,Ascolichen,,,,,,Type morphologique foliacé,Partie végétative
-Fungi,Ascolichen,,,,,,Type morphologique fruticuleux,Partie végétative
-Fungi,Ascolichen,,,,,,Type morphologique complexe (ou composé),Partie végétative
+Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Lecanoraceae,,,Type morphologique crustacé et lépreux,Partie végétative
+Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Parmeliaceae,Parmelia,,Type morphologique foliacé,Partie végétative
+Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Parmeliaceae,Usnea,,Type morphologique fruticuleux,Partie végétative
+Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Cladoniaceae,Cladonia,,Type morphologique complexe (ou composé),Partie végétative

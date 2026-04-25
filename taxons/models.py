@@ -17,6 +17,10 @@ class Taxon(models.Model):
     last_update = models.DateTimeField(
         blank=True, null=True, help_text="Date de la dernière mise à jour des résultats de recherche d'images"
     )
+    inaturalist_taxon_id = models.IntegerField(null=True, blank=True)
+
+    class Meta:
+        unique_together = [("inaturalist_taxon_id", "dataset")]
 
     def __str__(self):
         return self.nom_vernaculaire

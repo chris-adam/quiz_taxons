@@ -7,8 +7,8 @@ from taxons.models import Taxon
 from taxons.models import UserScore
 
 import random
-import requests
 import secrets
+from taxons.utils import requests_session
 
 
 CATEGORIES = [
@@ -190,39 +190,42 @@ def index(request):
 
 
 def fetch_images_for_taxon(taxon):
-    if taxon.espece and "spp." not in taxon.espece and "ssp." not in taxon.espece:
-        scientific_name = f"{taxon.genre} {taxon.espece}"
-    elif taxon.genre:
-        scientific_name = taxon.genre
-    elif taxon.famille:
-        scientific_name = taxon.famille
-    elif taxon.ordre:
-        scientific_name = taxon.ordre
-    elif taxon.classe:
-        scientific_name = taxon.classe
-    elif taxon.embranchement:
-        scientific_name = taxon.embranchement
-    elif taxon.regne:
-        scientific_name = taxon.regne
+    if taxon.inaturalist_taxon_id is not None:
+        taxon_id = taxon.inaturalist_taxon_id
     else:
-        return
-
-    try:
-        taxa_resp = requests.get(
-            "https://api.inaturalist.org/v1/taxa/autocomplete",
-            params={"q": scientific_name, "per_page": 1},
-            timeout=10,
-        ).json()
-        taxa_results = taxa_resp.get("results", [])
-        if not taxa_results:
+        if taxon.espece and "spp." not in taxon.espece and "ssp." not in taxon.espece:
+            scientific_name = f"{taxon.genre} {taxon.espece}"
+        elif taxon.genre:
+            scientific_name = taxon.genre
+        elif taxon.famille:
+            scientific_name = taxon.famille
+        elif taxon.ordre:
+            scientific_name = taxon.ordre
+        elif taxon.classe:
+            scientific_name = taxon.classe
+        elif taxon.embranchement:
+            scientific_name = taxon.embranchement
+        elif taxon.regne:
+            scientific_name = taxon.regne
+        else:
             return
-        taxon_id = taxa_results[0]["id"]
-    except Exception as e:
-        print(f"Error looking up iNaturalist taxon for {scientific_name}: {e}", flush=True)
-        return
+
+        try:
+            taxa_resp = requests_session().get(
+                "https://api.inaturalist.org/v1/taxa/autocomplete",
+                params={"q": scientific_name, "per_page": 1},
+                timeout=10,
+            ).json()
+            taxa_results = taxa_resp.get("results", [])
+            if not taxa_results:
+                return
+            taxon_id = taxa_results[0]["id"]
+        except Exception as e:
+            print(f"Error looking up iNaturalist taxon for {scientific_name}: {e}", flush=True)
+            return
 
     try:
-        obs_resp = requests.get(
+        obs_resp = requests_session().get(
             "https://api.inaturalist.org/v1/observations",
             params={
                 "taxon_id": taxon_id,
@@ -269,7 +272,7 @@ def fetch_sounds_for_taxon(taxon):
     try:
         resp = None
         for query in queries:
-            resp = requests.get(
+            resp = requests_session().get(
                 "https://xeno-canto.org/api/3/recordings",
                 params={"query": query, "key": settings.XENOCANTO_API_KEY},
                 timeout=15,

@@ -7,8 +7,8 @@ from taxons.models import Taxon
 import csv
 import os
 import pdfplumber
-import requests
 import time
+from taxons.utils import requests_session
 
 
 CATEGORY_MAP = {
@@ -84,7 +84,7 @@ CATEGORY_MAP = {
     "Grand Cormoran": "Oiseaux",
     "Grande Aigrette": "Oiseaux",
     "Hirondelle des fenêtres": "Oiseaux",
-    "Martin-pêcheur d’Europe": "Oiseaux",
+    "Martin-pêcheur d'Europe": "Oiseaux",
     "Mésange charbonnière": "Oiseaux",
     "Pic noir": "Oiseaux",
     "Roitelet huppé": "Oiseaux",
@@ -624,7 +624,7 @@ class Command(BaseCommand):
             writer = csv.writer(f)
             writer.writerows(hdrs)
 
-    def validate_inaturalist(self, row):
+    def _build_scientific_name_from_row(self, row):
         genre = row.get("Genre") or ""
         espece = row.get("Espèce") or ""
         famille = row.get("Famille") or ""
@@ -634,37 +634,42 @@ class Command(BaseCommand):
         regne = row.get("Règne") or ""
 
         if espece and "spp." not in espece and "ssp." not in espece:
-            scientific_name = f"{genre} {espece}"
+            return f"{genre} {espece}"
         elif genre:
-            scientific_name = genre
+            return genre
         elif famille:
-            scientific_name = famille
+            return famille
         elif ordre:
-            scientific_name = ordre
+            return ordre
         elif classe:
-            scientific_name = classe
+            return classe
         elif embranchement:
-            scientific_name = embranchement
+            return embranchement
         elif regne:
-            scientific_name = regne
-        else:
-            raise CommandError(f"Cannot determine scientific name for: {row.get('Nom vernaculaire')}")
+            return regne
+        return None
 
+    def resolve_inaturalist_id(self, query_term, nom_vernaculaire):
         if self.inaturalist_last_call and (datetime.now() - self.inaturalist_last_call).total_seconds() < 1:
             time.sleep(2)  # Respect iNaturalist rate limit of 1 request per second
         self.inaturalist_last_call = datetime.now()
         try:
-            resp = requests.get(
+            resp = requests_session().get(
                 "https://api.inaturalist.org/v1/taxa/autocomplete",
-                params={"q": scientific_name, "per_page": 1},
+                params={"q": query_term, "per_page": 1},
                 timeout=10,
             ).json()
         except Exception as e:
-            raise CommandError(f"iNaturalist request failed for {scientific_name}: {e}")
+            self.stdout.write(self.style.WARNING(
+                f"iNaturalist request failed for '{query_term}' ({nom_vernaculaire}): {e}"
+            ))
+            return None
 
-        if not resp.get("results"):
-            self.stdout.write(f"Not found in iNaturalist: {scientific_name} ({row.get('Nom vernaculaire')})")
-            # raise CommandError(f"Not found in iNaturalist: {scientific_name} ({row.get('Nom vernaculaire')})")
+        results = resp.get("results", [])
+        if not results:
+            self.stdout.write(f"Not found in iNaturalist: '{query_term}' ({nom_vernaculaire})")
+            return None
+        return results[0]["id"]
 
     def validate_xenocanto(self, row):
         genre = row.get("Genre") or ""
@@ -690,7 +695,7 @@ class Command(BaseCommand):
                 time.sleep(2)  # Respect Xeno-canto rate limit of 1 request per second
             self.xenocanto_last_call = datetime.now()
             try:
-                resp = requests.get(
+                resp = requests_session().get(
                     "https://xeno-canto.org/api/3/recordings",
                     params={"query": query, "key": settings.XENOCANTO_API_KEY},
                     timeout=15,
@@ -705,53 +710,101 @@ class Command(BaseCommand):
             # raise CommandError(f"Not found in Xeno-canto: {species_query} ({row.get('Nom vernaculaire')})")
 
     def import_csv(self, csv_path, dataset_name):
+        from collections import defaultdict
+
         with open(csv_path, "r", encoding="utf-8") as csvfile:
-            reader = csv.DictReader(csvfile)
-            created_count = 0
-            updated_count = 0
+            all_rows = list(csv.DictReader(csvfile))
 
-            for row in reader:
-                self.validate_inaturalist(row)
-                if row.get("Classe") == "Aves":
-                    self.validate_xenocanto(row)
+        # Pre-scan: detect scientific name collisions before any API calls
+        scientific_name_groups = defaultdict(list)
+        for row in all_rows:
+            sci_name = self._build_scientific_name_from_row(row)
+            if sci_name:
+                scientific_name_groups[sci_name].append(row.get("Nom vernaculaire"))
 
-                embranchement = row["Embranchement (Sous-embranchement)"] or ""
-                if "(" in embranchement:
-                    embranchement = embranchement.split("(")[0].strip()
+        collision_noms = set()
+        for sci_name, noms in scientific_name_groups.items():
+            if len(noms) > 1:
+                self.stdout.write(self.style.WARNING(
+                    f"iNaturalist collision: '{sci_name}' maps to: "
+                    + ", ".join(f"'{n}'" for n in noms)
+                    + " — will search by nom_vernaculaire instead"
+                ))
+                collision_noms.update(noms)
 
-                ordre = row["Ordre (Sous-ordre)"] or ""
-                if "(" in ordre:
-                    ordre = ordre.split("(")[0].strip()
+        created_count = 0
+        updated_count = 0
+        resolved_ids = {}  # taxon_id → nom_vernaculaire, tracks IDs claimed in this run
 
-                nom_vernaculaire = row["Nom vernaculaire"]
-                if nom_vernaculaire not in CATEGORY_MAP:
-                    self.stdout.write(
-                        self.style.WARNING(
-                            f"No category mapping for: '{nom_vernaculaire}' — importing with empty category"
-                        )
+        for row in all_rows:
+            nom_vernaculaire = row["Nom vernaculaire"]
+            sci_name = self._build_scientific_name_from_row(row)
+
+            if nom_vernaculaire in collision_noms:
+                query_term = nom_vernaculaire
+            else:
+                query_term = sci_name
+
+            if query_term:
+                raw_id = self.resolve_inaturalist_id(query_term, nom_vernaculaire)
+            else:
+                self.stdout.write(self.style.WARNING(
+                    f"Cannot determine search term for: '{nom_vernaculaire}'"
+                ))
+                raw_id = None
+
+            if raw_id is not None and raw_id in resolved_ids:
+                self.stdout.write(self.style.WARNING(
+                    f"nom_vernaculaire fallback still collides: ID {raw_id} already taken by "
+                    f"'{resolved_ids[raw_id]}' — storing None for '{nom_vernaculaire}'"
+                ))
+                inaturalist_taxon_id = None
+            elif raw_id is not None:
+                resolved_ids[raw_id] = nom_vernaculaire
+                inaturalist_taxon_id = raw_id
+            else:
+                inaturalist_taxon_id = None
+
+            if row.get("Classe") == "Aves":
+                self.validate_xenocanto(row)
+
+            embranchement = row["Embranchement (Sous-embranchement)"] or ""
+            if "(" in embranchement:
+                embranchement = embranchement.split("(")[0].strip()
+
+            ordre = row["Ordre (Sous-ordre)"] or ""
+            if "(" in ordre:
+                ordre = ordre.split("(")[0].strip()
+
+            if nom_vernaculaire not in CATEGORY_MAP:
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"No category mapping for: '{nom_vernaculaire}' — importing with empty category"
                     )
-                category = CATEGORY_MAP.get(nom_vernaculaire, "")
-
-                taxon, created = Taxon.objects.update_or_create(
-                    nom_vernaculaire=nom_vernaculaire,
-                    dataset=dataset_name,
-                    defaults={
-                        "regne": row["Règne"],
-                        "embranchement": embranchement,
-                        "classe": row["Classe"],
-                        "ordre": ordre,
-                        "famille": row["Famille"],
-                        "genre": row["Genre"],
-                        "espece": row["Espèce"],
-                        "partie_etat_indice": row["Partie/état/indice à reconnaitre"],
-                        "category": category,
-                    },
                 )
+            category = CATEGORY_MAP.get(nom_vernaculaire, "")
 
-                if created:
-                    created_count += 1
-                else:
-                    updated_count += 1
+            taxon, created = Taxon.objects.update_or_create(
+                nom_vernaculaire=nom_vernaculaire,
+                dataset=dataset_name,
+                defaults={
+                    "regne": row["Règne"],
+                    "embranchement": embranchement,
+                    "classe": row["Classe"],
+                    "ordre": ordre,
+                    "famille": row["Famille"],
+                    "genre": row["Genre"],
+                    "espece": row["Espèce"],
+                    "partie_etat_indice": row["Partie/état/indice à reconnaitre"],
+                    "category": category,
+                    "inaturalist_taxon_id": inaturalist_taxon_id,
+                },
+            )
+
+            if created:
+                created_count += 1
+            else:
+                updated_count += 1
 
         return created_count, updated_count
 
