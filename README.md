@@ -18,7 +18,7 @@ docker compose build
 docker compose up -d
 docker compose exec -T quiz uv run python manage.py migrate
 docker compose exec -T quiz uv run python manage.py import_taxons
-docker compose exec -T quiz uv run python manage.py createsuperadmin
+docker compose exec -it quiz uv run python manage.py createsuperuser
 ```
 
 Visit http://127.0.0.1:8000 to play
@@ -51,5 +51,5 @@ docker compose -f docker-compose.prod.yaml build
 docker compose -f docker-compose.prod.yaml up -d
 docker compose -f docker-compose.prod.yaml exec -T quiz uv run python manage.py migrate
 docker compose -f docker-compose.prod.yaml exec -T quiz uv run python manage.py import_taxons
-docker compose -f docker-compose.prod.yaml exec -T quiz uv run python manage.py createsuperadmin
+docker compose -f docker-compose.prod.yaml exec -it quiz uv run python manage.py createsuperuser
 ```

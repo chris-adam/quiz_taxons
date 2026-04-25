@@ -733,8 +733,7 @@ class Command(BaseCommand):
                 category = CATEGORY_MAP.get(nom_vernaculaire, "")
 
                 taxon, created = Taxon.objects.update_or_create(
-                    genre=row["Genre"],
-                    espece=row["Espèce"],
+                    nom_vernaculaire=nom_vernaculaire,
                     dataset=dataset_name,
                     defaults={
                         "regne": row["Règne"],
@@ -742,7 +741,8 @@ class Command(BaseCommand):
                         "classe": row["Classe"],
                         "ordre": ordre,
                         "famille": row["Famille"],
-                        "nom_vernaculaire": nom_vernaculaire,
+                        "genre": row["Genre"],
+                        "espece": row["Espèce"],
                         "partie_etat_indice": row["Partie/état/indice à reconnaitre"],
                         "category": category,
                     },
