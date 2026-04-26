@@ -294,8 +294,15 @@
 
         .answer-section h2 {
             color: #2d3748;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
             font-size: 1.5em;
+        }
+
+        .hint-text {
+            font-size: 13px;
+            color: #718096;
+            font-style: italic;
+            margin-bottom: 20px;
         }
 
         .input-group {
@@ -452,6 +459,7 @@
                     </div>
                     <div id="free-input-form">
                         <h2>Quel est ce taxon ?</h2>
+                        <p class="hint-text">A reconnaitre: {{ taxon.partie_etat_indice|default:"/" }}</p>
                         <form id="answer-form">
                             {% csrf_token %}
                             <div class="input-group">
@@ -475,6 +483,7 @@
                     </div>
                     <div id="propositions-form" style="display: none;">
                         <h2>Choisissez la bonne réponse :</h2>
+                        <p class="hint-text">A reconnaitre: {{ taxon.partie_etat_indice|default:"/" }}</p>
                         <form method="post">
                             {% csrf_token %}
                             <div class="propositions">
