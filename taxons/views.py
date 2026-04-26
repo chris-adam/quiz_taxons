@@ -228,19 +228,27 @@ def fetch_images_for_taxon(taxon):
             print(f"Error looking up iNaturalist taxon for {scientific_name}: {e}", flush=True)
             return
 
-    try:
-        obs_resp = requests_session().get(
+    def _fetch_obs(place_id):
+        resp = requests_session().get(
             "https://api.inaturalist.org/v1/observations",
             params={
                 "taxon_id": taxon_id,
-                "place_id": 7008,
+                "place_id": place_id,
                 "quality_grade": "research",
                 "photos": "true",
                 "per_page": 30,
             },
             timeout=15,
         ).json()
-        for obs in obs_resp.get("results", []):
+        return resp.get("results", [])
+
+    try:
+        observations = _fetch_obs(7008)  # Belgium
+        if len(observations) < 4:
+            france_obs = _fetch_obs(6753)  # France
+            observations = observations + france_obs
+        seen_urls = set()
+        for obs in observations:
             photos = obs.get("photos", [])
             if not photos:
                 continue
@@ -249,6 +257,9 @@ def fetch_images_for_taxon(taxon):
             if not square_url:
                 continue
             medium_url = square_url.replace("/square.", "/medium.")
+            if medium_url in seen_urls:
+                continue
+            seen_urls.add(medium_url)
             taxon.search_results.create(
                 title=photo.get("attribution", "")[:300],
                 link=medium_url,
