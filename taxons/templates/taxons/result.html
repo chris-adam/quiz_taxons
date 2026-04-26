@@ -1,6 +1,31 @@
 {% if result %}
     <div class="result-container">
         <div class="result {{ result.class }}">{{ result.message }}</div>
+        {% if guessed_photos or guessed_song %}
+        <div style="margin-top: 24px;">
+            <p style="font-weight: 600; color: #4a5568; margin-bottom: 12px;">
+                📷 {{ guessed_taxon.nom_vernaculaire }}{% if guessed_taxon.espece %} ({{ guessed_taxon.genre }} {{ guessed_taxon.espece }}){% endif %} :
+            </p>
+            {% if guessed_song %}
+            <div style="text-align: center; margin-bottom: 12px;">
+                <audio controls>
+                    <source src="{{ guessed_song.link }}" type="audio/mpeg">
+                </audio>
+            </div>
+            {% endif %}
+            {% if guessed_photos %}
+            <div class="images-grid" style="margin-bottom: 0;">
+                {% for image in guessed_photos %}
+                <div class="image-container">
+                    <a href="{{ image.image_context_link }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ image.link }}" alt="{{ image.title }}" loading="lazy">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
         <button class="btn btn-primary"
                 style="margin-top: 20px"
                 onclick="window.location.href='{% url 'index' %}?dataset={{ dataset|urlencode }}{% if category %}&category={{ category|urlencode }}{% endif %}'">Question suivante →</button>

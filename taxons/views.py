@@ -300,6 +300,26 @@ def fetch_sounds_for_taxon(taxon):
         print(f"Error fetching Xeno-canto sounds for {taxon.nom_vernaculaire}: {e}", flush=True)
 
 
+def get_photos_for_taxon(taxon, count=4, already_shown_ids=None):
+    """Return up to `count` photos for a taxon without touching scores.
+
+    Keeps already-shown photos first, then adds random extras to reach `count`.
+    """
+    if not taxon.search_results.exists():
+        if taxon.classe == "Aves":
+            fetch_sounds_for_taxon(taxon)
+        fetch_images_for_taxon(taxon)
+    photos_qs = taxon.search_results.exclude(image_context_link__contains="xeno-canto")
+    result = []
+    if already_shown_ids:
+        result = list(photos_qs.filter(id__in=already_shown_ids))
+    remaining = count - len(result)
+    if remaining > 0:
+        extra_ids = [p.id for p in result]
+        result += list(photos_qs.exclude(id__in=extra_ids).order_by("?")[:remaining])
+    return result
+
+
 def render_images_grid(request, taxon_id):
     taxon = Taxon.objects.get(id=taxon_id)
     is_bird = taxon.classe == "Aves"
@@ -353,6 +373,9 @@ def render_result(request):
     session_id = get_or_create_session_id(request)
     category = request.session.get("current_category", "")
     dataset = request.session.get("current_dataset", "")
+    taxon = None
+    guessed_taxon = None
+    result = {}
 
     taxon_id = request.session.get("current_taxon_id")
     if taxon_id:
@@ -394,14 +417,47 @@ def render_result(request):
             "message": "❌ No active question",
         }
 
+    # After a real answer, fetch photos for the correct taxon (no score impact)
+    # and for the guessed (wrong) taxon if applicable.
+    correct_photos = []
+    guessed_photos = []
+    guessed_song = None
+    if result and taxon:
+        already_shown = request.session.get("search_results_ids", [])
+        correct_photos = get_photos_for_taxon(taxon, already_shown_ids=already_shown)
+    if result.get("class") == "incorrect" and guessed_taxon:
+        guessed_photos = get_photos_for_taxon(guessed_taxon)
+        if guessed_taxon.classe == "Aves":
+            guessed_song = guessed_taxon.search_results.filter(
+                image_context_link__contains="xeno-canto"
+            ).order_by("?").first()
+
     top_scores, bottom_scores, has_gap, bottom_start_rank = get_score_lists(session_id, dataset=dataset, category=category)
-    result_html = render_to_string("taxons/result.html", {"result": result, "category": category, "dataset": dataset}, request=request)
+    result_html = render_to_string(
+        "taxons/result.html",
+        {
+            "result": result,
+            "category": category,
+            "dataset": dataset,
+            "guessed_taxon": guessed_taxon,
+            "guessed_photos": guessed_photos,
+            "guessed_song": guessed_song,
+        },
+        request=request,
+    )
     portlet_html = render_to_string(
         "taxons/scores_portlet.html",
         {"top_scores": top_scores, "bottom_scores": bottom_scores, "has_gap": has_gap, "bottom_start_rank": bottom_start_rank, "oob": True},
         request=request,
     )
-    return HttpResponse(result_html + portlet_html)
+    images_html = ""
+    if result and taxon:
+        images_html = render_to_string(
+            "taxons/answer_images.html",
+            {"images": correct_photos},
+            request=request,
+        )
+    return HttpResponse(result_html + portlet_html + images_html)
 
 
 def show_propositions(request):

@@ -1,0 +1,12 @@
+<div id="images" hx-swap-oob="true">
+    <div class="images-grid">
+        {% for image in images %}
+        <div class="image-container">
+            <a href="{{ image.image_context_link }}" target="_blank" rel="noopener noreferrer">
+                <img src="{{ image.link }}" alt="{{ image.title }}" loading="lazy">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div id="controls" hx-swap-oob="true"></div>
