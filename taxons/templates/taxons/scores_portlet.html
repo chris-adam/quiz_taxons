@@ -4,6 +4,7 @@
     <table class="scores-table">
         <thead>
             <tr>
+                <th style="text-align:right">#</th>
                 <th>Taxon</th>
                 <th style="text-align:right">Score</th>
             </tr>
@@ -11,16 +12,18 @@
         <tbody>
             {% for us in top_scores %}
             <tr>
+                <td class="rank-value">{{ forloop.counter }}</td>
                 <td>{{ us.taxon.nom_vernaculaire }}</td>
                 <td class="score-value">{{ us.score }}</td>
             </tr>
             {% endfor %}
-            {% if bottom_scores %}
+            {% if has_gap %}
             <tr class="scores-separator">
-                <td colspan="2">...</td>
+                <td colspan="3">...</td>
             </tr>
             {% for us in bottom_scores %}
             <tr>
+                <td class="rank-value">{{ bottom_start_rank|add:forloop.counter0 }}</td>
                 <td>{{ us.taxon.nom_vernaculaire }}</td>
                 <td class="score-value">{{ us.score }}</td>
             </tr>

@@ -409,7 +409,7 @@ Animalia,Chordata,Aves,Passeriformes,Phylloscopidae,Phylloscopus,collybita,Pouil
 Animalia,Chordata,Aves,Passeriformes,Regulidae,Regulus,spp.,Roitelets,Adulte
 Animalia,Chordata,Aves,Passeriformes,Troglodytidae,Troglodytes,troglodytes,Troglodyte mignon,Adulte
 Animalia,Chordata,Aves,Passeriformes,Paridae,Cyanistes,caeruleus,Mésange bleue,Adulte
-Animalia,Chordata,Aves,Passeriformes,Paridae,Parus,major,Mésange charbon nière,Adulte
+Animalia,Chordata,Aves,Passeriformes,Paridae,Parus,major,Mésange charbonnière,Adulte
 Animalia,Chordata,Aves,Passeriformes,Aegithalidae,Aegithalos,caudatus,Orite à longue queue,Adulte
 Animalia,Chordata,Aves,Passeriformes,Sittidae,Sitta,europaea,Sittelle torchepot,Adulte + forge
 Animalia,Chordata,Aves,Passeriformes,Certhiidae,Certhia,spp.,Grimpereaux,Adulte
@@ -419,7 +419,7 @@ Animalia,Chordata,Aves,Passeriformes,Corvidae,Coloeus,monedula,Choucas des tours
 Animalia,Chordata,Aves,Passeriformes,Corvidae,Garrulus,glandarius,Geai des chênes,Adulte
 Animalia,Chordata,Aves,Passeriformes,Corvidae,Pica,pica,Pie bavarde,Adulte + nid
 Animalia,Chordata,Aves,Passeriformes,Sturnidae,Sturnus,vulgaris,Étourneau sanson net,Adulte
-Animalia,Chordata,Aves,Passeriformes,Passeridae,Passer,domesticus,Moineau domes tique,Adulte
+Animalia,Chordata,Aves,Passeriformes,Passeridae,Passer,domesticus,Moineau domestique,Adulte
 Animalia,Chordata,Aves,Passeriformes,Fringillidae,Carduelis,carduelis,Chardonneret élégant,Adulte
 Animalia,Chordata,Aves,Passeriformes,Fringillidae,Chloris,chloris,Verdier d’Europe,Mâle nuptial
 Animalia,Chordata,Aves,Passeriformes,Fringillidae,Coccothraustes,coccothraustes,Grosbec casse-noyaux,Adulte
@@ -487,7 +487,7 @@ Fungi,Basidiomycota,,,,Stropharia,aeruginosa,Strophaire vert-de-gris,Sporophore
 Fungi,Basidiomycota,,,,Tremella,mesenterica,Trémelle mésentérique,Sporophore
 Fungi,Basidiomycota,,,,Tricholoma,spp.,Tricholomes,Sporophore
 Fungi,Basidiomycota,,,,Volvariella,spp.,Volvaires,Sporophore
-Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Lecanoraceae,,,Type morphologique crustacé et lépreux,Partie végétative
-Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Parmeliaceae,Parmelia,,Type morphologique foliacé,Partie végétative
-Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Parmeliaceae,Usnea,,Type morphologique fruticuleux,Partie végétative
-Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Cladoniaceae,Cladonia,,Type morphologique complexe (ou composé),Partie végétative
+Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Lecanoraceae,,,Lichen (Type morphologique crustacé et lépreux),Partie végétative
+Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Parmeliaceae,Parmelia,,Lichen (Type morphologique foliacé),Partie végétative
+Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Parmeliaceae,Usnea,,Lichen (Type morphologique fruticuleux),Partie végétative
+Fungi,Ascolichen,Lecanoromycetes,Lecanorales,Cladoniaceae,Cladonia,,Lichen (Type morphologique complexe (ou composé)),Partie végétative

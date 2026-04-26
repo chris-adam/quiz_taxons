@@ -9,28 +9,30 @@
         </div>
     {% endfor %}
 </div>
-{% if song %}
-<div class="song-container" style="text-align: center;">
-    <audio controls>
+{% if song and is_initial_load %}
+<div id="song-container" hx-swap-oob="true" style="text-align: center;">
+    <audio controls autoplay>
         <source src="{{ song.link }}" type="audio/mpeg">
     </audio>
 </div>
 {% endif %}
-<div class="controls">
-    <form method="post" style="display: inline;">
-        <input type="hidden" name="action" value="add_image">
-        <button type="submit"
-                class="btn btn-primary"
-                hx-target="#images"
-                hx-post="{% url 'images_grid' taxon.id %}"
-                {% if images|length >= 4 %}disabled{% endif %}>
-            📸 Ajouter
-            {% if images|length <= 2 %}
-                1 photo
-            {% else %}
-                2 photos
-            {% endif %}
-            ({{ images|length }}/4)
-        </button>
-    </form>
+<div id="controls" hx-swap-oob="true">
+    <div class="controls">
+        <form method="post" style="display: inline;">
+            <input type="hidden" name="action" value="add_image">
+            <button type="submit"
+                    class="btn btn-primary"
+                    hx-target="#images"
+                    hx-post="{% url 'images_grid' taxon.id %}"
+                    {% if images|length >= 4 %}disabled{% endif %}>
+                📸 Ajouter
+                {% if images|length <= 2 %}
+                    1 photo
+                {% else %}
+                    2 photos
+                {% endif %}
+                ({{ images|length }}/4)
+            </button>
+        </form>
+    </div>
 </div>

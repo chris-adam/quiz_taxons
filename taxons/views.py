@@ -35,12 +35,14 @@ def get_score_lists(session_id, dataset="", category=""):
     all_scores = qs.select_related("taxon").order_by("-score", "-updated_at")
     top_scores = list(all_scores[:10])
     top_ids = [s.id for s in top_scores]
-    bottom_scores = list(
-        qs.exclude(id__in=top_ids)
-        .select_related("taxon")
-        .order_by("score", "-updated_at")[:10]
-    )
-    return top_scores, bottom_scores
+    bottom_qs = qs.exclude(id__in=top_ids).select_related("taxon").order_by("score", "-updated_at")
+    bottom_scores = list(bottom_qs[:10])
+    bottom_total = bottom_qs.count()
+    has_gap = bottom_total > 10
+    total_count = len(top_scores) + bottom_total
+    bottom_scores.reverse()
+    bottom_start_rank = total_count - len(bottom_scores) + 1
+    return top_scores, bottom_scores, has_gap, bottom_start_rank
 
 
 def get_or_create_session_id(request):
@@ -163,7 +165,7 @@ def index(request):
         nv_qs = nv_qs.filter(category=category)
     nom_vernaculaire_list = list(nv_qs.order_by("nom_vernaculaire").values_list("nom_vernaculaire", flat=True))
 
-    top_scores, bottom_scores = get_score_lists(session_id, dataset=dataset, category=category)
+    top_scores, bottom_scores, has_gap, bottom_start_rank = get_score_lists(session_id, dataset=dataset, category=category)
 
     existing_categories = set(
         Taxon.objects.filter(dataset=dataset)
@@ -181,6 +183,8 @@ def index(request):
             "propositions": propositions,
             "top_scores": top_scores,
             "bottom_scores": bottom_scores,
+            "has_gap": has_gap,
+            "bottom_start_rank": bottom_start_rank,
             "dataset": dataset,
             "category": category,
             "categories": categories,
@@ -337,7 +341,12 @@ def render_images_grid(request, taxon_id):
         song = SearchResult.objects.filter(id=request.session.get("current_song_id")).first()
 
     images = SearchResult.objects.filter(id__in=request.session["search_results_ids"], taxon=taxon)
-    return render(request, "taxons/images_grid.html", {"images": images, "song": song, "taxon": taxon})
+    return render(request, "taxons/images_grid.html", {
+        "images": images,
+        "song": song,
+        "taxon": taxon,
+        "is_initial_load": request.method == "GET",
+    })
 
 
 def render_result(request):
@@ -385,11 +394,11 @@ def render_result(request):
             "message": "❌ No active question",
         }
 
-    top_scores, bottom_scores = get_score_lists(session_id, dataset=dataset, category=category)
+    top_scores, bottom_scores, has_gap, bottom_start_rank = get_score_lists(session_id, dataset=dataset, category=category)
     result_html = render_to_string("taxons/result.html", {"result": result, "category": category, "dataset": dataset}, request=request)
     portlet_html = render_to_string(
         "taxons/scores_portlet.html",
-        {"top_scores": top_scores, "bottom_scores": bottom_scores, "oob": True},
+        {"top_scores": top_scores, "bottom_scores": bottom_scores, "has_gap": has_gap, "bottom_start_rank": bottom_start_rank, "oob": True},
         request=request,
     )
     return HttpResponse(result_html + portlet_html)
